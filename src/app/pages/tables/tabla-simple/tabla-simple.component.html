@@ -1,0 +1,31 @@
+<nz-table #nzTable [nzData]="dataVisible" nzTableLayout="fixed">
+    <thead>
+        <tr>
+            <th *ngFor="let l of labels">
+                {{l.label}}
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of nzTable.data">
+            <td *ngFor="let l of labels">{{ data[l.value] }}</td>
+            <td is-flex is-justify-content-space-around>
+                <span nz-tooltip nzTooltipTitle="Detalle" (click)="detalleFunction()">
+                    <i class="far fa-eye is-primary"></i>
+                </span>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+            <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+                Search
+            </button>
+            <button nz-button nzSize="small" (click)="reset()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>
