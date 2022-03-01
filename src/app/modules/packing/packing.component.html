@@ -1,0 +1,119 @@
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div>
+        <h1 class="subtitle">Área de packing</h1>
+      </div>
+      <div class="columns">
+        <div class="column"></div>
+        <div class="column is-four-fifths">
+          <div class="box">
+            <div class="columns is-multiline">
+              <div class="column is-6">
+                <div class="field">
+                  <label class="label">Rango de busqueda</label>
+                  <div class="control">
+                    <nz-range-picker [(ngModel)]="date"></nz-range-picker>
+                  </div>
+                </div>
+              </div>
+              <div class="column is-6">
+                <div class="field">
+                  <label class="label">Cultivo</label>
+                  <div class="control">
+                    <nz-select [(ngModel)]="idcultivo" style="width: 100%;" nzPlaceHolder="Seleccione el cultivo">
+                      <nz-option [nzValue]="-1" nzLabel="TODOS"></nz-option>
+                      <nz-option *ngFor="let m of cultivos" [nzValue]="m.idcultivo" [nzLabel]="m.detallecultivo">
+                      </nz-option>
+                    </nz-select>
+                  </div>
+                </div>
+              </div>
+              <div class="column is-12">
+                <p class="field is-flex is-justify-content-space-around">
+                  <button class="button is-rounded" (click)="buscar()" [disabled]="!date">
+                    <span class="icon">
+                      <i class="fas fa-search"></i>
+                    </span>
+                  </button>
+                  <a class="button is-rounded is-primary">
+                    <span class="icon">
+                      <i class="fas fa-paper-plane"></i>
+                    </span>
+                  </a>
+                  <a class="button is-rounded is-info">
+                    <span class="icon is-small">
+                      <i class="fas fa-clipboard-check"></i>
+                    </span>
+                  </a>
+                  <a class="button is-rounded is-danger">
+                    <span class="icon is-small">
+                      <i class="fas fa-file-code"></i>
+                    </span>
+                  </a>
+                  <a class="button is-rounded is-warning">
+                    <span class="icon is-small">
+                      <i class="fas fa-file-excel"></i>
+                    </span>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="column"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-tabla-only [data]='data' [labels]='labels' [getInfo]='getInfo' [loading]='loading'></app-tabla-only>
+
+<nz-modal [(nzVisible)]="viewDetails" [nzWidth]='"80%"' [nzStyle]="{ top: '15px'}" nzTitle="Detalles del packing"
+
+  (nzOnCancel)="viewDetails=false" (nzOnOk)="viewDetails=false">
+
+  <div class="container">
+    <div class="columns">
+      <div class="column"></div>
+      <div class="column is-four-fifths">
+        <div>
+          <div class="columns is-multiline">
+            <div class="column is-12">
+              <div class="field is-flex is-justify-content-space-around">
+                <a class="button is-rounded is-primary" nz-tooltip nzTooltipTitle="Sincronizar" (click)="refreshDetail()">
+                  <span class="icon">
+                    <i class="fas fa-sync"></i>
+                  </span>
+                </a>
+                <a *ngIf="!data" class="button is-rounded is-info" disabled>
+                  <span class="icon is-small">
+                    <i class="fas fa-code"></i>
+                  </span>
+                </a>
+                <a *ngIf="data?.length>0" class="button is-rounded is-info" nz-tooltip nzTooltipTitle="Descargar JSON"
+                  [class.disabled]='data'>
+                  <span class="icon is-small">
+                    <i class="fas fa-code"></i>
+                  </span>
+                </a>
+                <a class="button is-rounded is-danger" nz-tooltip nzTooltipTitle="Descargar EXCEL">
+                  <span class="icon is-small">
+                    <i class="fas fa-file-excel"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="column"></div>
+    </div>
+  </div>
+
+
+
+  <app-tabla-only [data]='dataDetails' [labels]='labelsDetails' [loading]='loadingDetails'></app-tabla-only>
+</nz-modal>

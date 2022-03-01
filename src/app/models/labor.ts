@@ -15,7 +15,7 @@ export class Labor implements Deserializable{
     
     deserialize(input: any) {
         Object.assign(this, input);
-        this.Actividad= new Actividad().deserialize(input['Actividad']);
+        if(input['Actividad'])    this.Actividad= new Actividad().deserialize(input['Actividad']);
         return this;
     }
 
@@ -23,3 +23,4 @@ export class Labor implements Deserializable{
         return this.Actividad.descripcion;
     }
 }
+

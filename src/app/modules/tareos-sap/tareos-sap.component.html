@@ -18,10 +18,8 @@
                           <div class="field">
                               <label class="label">Mantenedor</label>
                               <div class="control">
-                                  <nz-select ngModel="lucy" style="width: 100%;">
-                                      <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-                                      <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-                                      <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+                                  <nz-select ngModel="lucy" style="width: 100%;" nzPlaceHolder="Seleccione el mantenedor">
+                                      <nz-option *ngFor="let m of mantenedors" [nzValue]="m.idmantenedor" [nzLabel]="m.detallemantenedor"></nz-option>                                      
                                     </nz-select>
                               </div>
                           </div>
@@ -35,17 +33,22 @@
                               </a>
                               <a class="button is-rounded is-primary">
                                 <span class="icon">
-                                  <i class="fa fa-twitter"></i>
+                                  <i class="fas fa-paper-plane"></i>
                                 </span>
                               </a>
                               <a class="button is-rounded is-info">
                                 <span class="icon is-small">
-                                  <i class="fa fa-facebook"></i>
+                                  <i class="fas fa-clipboard-check"></i>
                                 </span>
                               </a>
                               <a class="button is-rounded is-danger">
                                 <span class="icon is-small">
-                                  <i class="fa fa-google-plus"></i>
+                                  <i class="fas fa-file-code"></i>
+                                </span>
+                              </a>
+                              <a class="button is-rounded is-warning">
+                                <span class="icon is-small">
+                                  <i class="fas fa-file-excel"></i>
                                 </span>
                               </a>
                             </p>

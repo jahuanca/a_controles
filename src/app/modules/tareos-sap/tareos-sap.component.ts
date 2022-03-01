@@ -1,7 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { getISOWeek } from 'date-fns';
+import { MantenedorTareo } from 'src/app/models/mantenedor-tareo';
 import { PersonalTareaProceso } from 'src/app/models/personal-tarea-proceso';
+import { MantenedorTareoService } from 'src/app/services/mantenedor-tareo.service';
 import { PersonalTareaProcesoService } from 'src/app/services/personal-tarea-proceso.service';
+
+class ByRango{
+  fechaInicio: Date;
+  fechaFin: Date;
+  esRendimiento: boolean;
+  esPacking: boolean;
+}
 
 @Component({
   selector: 'app-tareos-sap',
@@ -11,23 +20,34 @@ import { PersonalTareaProcesoService } from 'src/app/services/personal-tarea-pro
 export class TareosSapComponent implements OnInit {
 
   searchValue = '';
+  mantenedors: MantenedorTareo[];
   visible = false;
   listOfData: PersonalTareaProceso[] = [];
   listOfDisplayData = [...this.listOfData];
 
-  constructor(private personalTareaProcesoService: PersonalTareaProcesoService) {
+  constructor(private personalTareaProcesoService: PersonalTareaProcesoService, private mantenedorTareoService: MantenedorTareoService) {
 
   }
 
   ngOnInit(): void {
+    this.getMantenedors();
   }
 
-  buscar(){
-    this.personalTareaProcesoService.getPersonalTareaProcesos()
-      .subscribe( res=> {
-        this.listOfData= res as PersonalTareaProceso[];
-        this.listOfDisplayData=[...this.listOfData];
-      }, err => {});
+  getMantenedors() {
+    this.mantenedorTareoService.getMantenedorTareos()
+      .subscribe(res => {
+        this.mantenedors = res as MantenedorTareo[];
+      }, err => {
+
+      });
+  }
+
+  buscar() {
+    /* this.personalTareaProcesoService.byRango()
+      .subscribe(res => {
+        this.listOfData = res as PersonalTareaProceso[];
+        this.listOfDisplayData = [...this.listOfData];
+      }, err => { }); */
   }
 
   date = null;

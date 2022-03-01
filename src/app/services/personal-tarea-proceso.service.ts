@@ -54,4 +54,11 @@ export class PersonalTareaProcesoService {
         map(data => data.map(data => new PersonalTareaProceso().deserialize(data)))
       );
   }
+
+  byRango(id: number): Observable<PersonalTareaProceso[]> {
+    return this.http.get<PersonalTareaProceso[]>(`${this.URL_API}/rango`, { headers: this.headers })
+      .pipe(
+        map(data => data.map(data => new PersonalTareaProceso().deserialize(data)))
+      );
+  }
 }

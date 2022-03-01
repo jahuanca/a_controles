@@ -8,6 +8,7 @@ import { Actividad } from '../models/actividad';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ActividadService {
 
 
@@ -18,6 +19,20 @@ export class ActividadService {
     this.headers = new HttpHeaders();
     this.headers = this.headers.append('Accept', 'application/json');
     //this.headers=this.headers.append('Authorization', 'Bearer '+localStorage.getItem("tokenSumate2020"));
+  }
+
+  getActividadsByLimitAndOffset(limit: number, offset:number) {
+    return this.http.get<Actividad[]>(`${this.URL_API}/range&limit=${limit}&offset=${offset}`, { headers: this.headers })
+      .pipe(
+        map(data => data.map(data => new Actividad().deserialize(data)))
+      );
+  }
+
+  getActividadsCount() {
+    return this.http.get<number>(`${this.URL_API}/count`, { headers: this.headers })
+      .pipe(
+        map(data => data)
+      );
   }
 
   getActividads() {

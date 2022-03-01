@@ -6,6 +6,13 @@ export class Variables {
     constructor() {
 
     }
+
+    public static get(promise:Promise<any[]>) {
+        return promise.then(data => {
+           return [null, data];
+        })
+        .catch(err => [err]);
+    }
     
     public tipo:Number=0;
     

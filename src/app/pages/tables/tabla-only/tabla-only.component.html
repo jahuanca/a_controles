@@ -1,0 +1,53 @@
+<nz-table #nzTable
+[nzLoading]='loading'
+[nzPageSize]='limit ? limit : 8'
+[nzData]="dataVisible" nzTableLayout="fixed" [nzShowPagination]='!maxCount'>
+    <thead>
+        <tr>
+            <ng-container *ngFor="let l of labels">
+                <th *ngIf="l.visible">
+                    {{l.label}}
+                </th>
+            </ng-container>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of nzTable.data">
+            <ng-container *ngFor="let l of labels">
+                <td *ngIf="l.visible">
+                    <div *ngIf="l.isHtml; else elseTemplate">
+                        {{data[l.value]}}
+                        <div class="button" (click)="getInfo(data)">
+                            <span class="icon is-small"> <i class="fas fa-info-circle"></i> </span>
+                        </div>
+                    </div>
+                    <ng-template #elseTemplate>
+                        {{data[l.value]}}
+                    </ng-template>
+                </td>
+            </ng-container>
+                
+            <td is-flex is-justify-content-space-around>
+                <span nz-tooltip nzTooltipTitle="Detalle">
+                    <i class="far fa-eye is-primary"></i>
+                </span>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="maxCount" [nzPageSize]='limit'
+                (nzPageIndexChange)='change($event)' nzSimple></nz-pagination>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+            <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+                Search
+            </button>
+            <button nz-button nzSize="small" (click)="reset()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>
