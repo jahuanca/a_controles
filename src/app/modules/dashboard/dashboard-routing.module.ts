@@ -9,8 +9,11 @@ const routes: Routes = [
     children: [
       { path: '', loadChildren: () => import('./../home/home.module').then(m => m.HomeModule) },
       { path: 'personal', loadChildren: () => import('./../personal/personal.module').then(m => m.PersonalModule) },
+      { path: 'absentismo', loadChildren: () => import('./../absentismo/absentismo.module').then(m => m.AbsentismoModule) },
+      { path: 'presentaciones', loadChildren: () => import('./../presentacion/presentacion.module').then(m => m.PresentacionModule) },
+      { path: 'personal-observado', loadChildren: () => import('./../personalobservado/personalobservado.module').then(m => m.PersonalObservadoModule) },
       { path: 'usuarios', loadChildren: () => import('./../usuarios/usuarios.module').then(m => m.UsuariosModule) },
-      { path: 'centros-de-costo', loadChildren: () => import('./../subdivisiones/subdivisiones.module').then(m => m.SubdivisionesModule) },
+      { path: 'centros-de-costo', loadChildren: () => import('./../centrocosto/centrocosto.module').then(m => m.CentroCostoModule) },
       { path: 'tareos', loadChildren: () => import('./../tareos-sap/tareos-sap.module').then(m => m.TareosSapModule) },
       { path: 'packing', loadChildren: () => import('./../packing/packing.module').then(m => m.PackingModule) },
       { path: 'varios', loadChildren: () => import('./../varios/varios.module').then(m => m.VariosModule) },

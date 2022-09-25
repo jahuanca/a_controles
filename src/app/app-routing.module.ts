@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'seleccion', loadChildren: () => import('./modules/seleccion/seleccion.module').then(m => m.SeleccionModule) },
   { path: 'usuarios', loadChildren: () => import('./modules/usuarios/usuarios.module').then(m => m.UsuariosModule) },
   { path: 'personal', loadChildren: () => import('./modules/personal/personal.module').then(m => m.PersonalModule) },
+  { path: 'centrocosto', loadChildren: () => import('./modules/centrocosto/centrocosto.module').then(m => m.CentroCostoModule) },
   /* { path: 'tareos-sap', loadChildren: () => import('./modules/tareos-sap/tareos-sap.module').then(m => m.TareosSapModule) }, */
 ];
 

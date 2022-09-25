@@ -1,22 +1,22 @@
 <nz-table #basicTable [nzData]="[1,2,3,4,5]">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Address</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of basicTable.data">
-        <td>d</td>
-        <td>5</td>
-        <td>555</td>
-        <td>
-          <a>Action 一 d</a>
-          <nz-divider nzType="vertical"></nz-divider>
-          <a>Delete</a>
-        </td>
-      </tr>
-    </tbody>
-  </nz-table>
+  <thead>
+    <tr>
+      <th>Codigo</th>
+      <th>Labores</th>
+      <th>Actividades</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>d</td>
+      <td>5</td>
+      <td>555</td>
+      <td>
+        <a>Action 一 d</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a>Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
