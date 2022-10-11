@@ -1,3 +1,4 @@
+
 import { Deserializable } from "./deserializable";
 
 export class PersonalEmpresa implements Deserializable{
@@ -14,7 +15,13 @@ export class PersonalEmpresa implements Deserializable{
     fechacese: boolean;
     idusuario: number;
     itemgrupopersonal: number;
-
+    areanomina:string;
+    idareanomina:number;
+    subdivision: string;
+    idsubdivision:number;
+    posicion:string;
+    cargo:string;
+    
     constructor() { }
 
     deserialize(input: any) {

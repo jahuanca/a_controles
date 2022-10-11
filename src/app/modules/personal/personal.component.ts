@@ -21,10 +21,10 @@ export class PersonalComponent implements OnInit {
   viewLabors:boolean=false;
   labels: { label: string, value: string, isHtml: boolean, visible: boolean }[] = [
     { label: 'Codigo E.', value: 'codigoempresa', isHtml: false, visible: false },
-    { label: 'Nombre', value: 'nombreCompleto', isHtml: false, visible: true },
-    { label: 'Nombre', value: 'descripcion', isHtml: false, visible: true },
-    { label: 'Tipo', value: 'rendimiento', isHtml: false, visible: true },
-    { label: 'Labores', value: 'cantidadLabors', isHtml: true, visible: true },
+    { label: 'Nombres y Apellidos', value: 'nombreCompleto', isHtml: false, visible: true },
+    { label: 'Fecha Ingreso', value: 'fechaingreso', isHtml: false, visible: true },
+    { label: 'Fecha Cese', value: 'fechacese', isHtml: false, visible: true },
+    { label: 'Grupo Personal', value: 'itemgrupopersonal', isHtml: false, visible: true },
   ];
 
   constructor(private actividadService: PersonalEmpresaService, private router:Router) { }
