@@ -1,5 +1,8 @@
 import { DatePipe } from "@angular/common";
+import { Actividad } from "./actividad";
 import { Deserializable } from "./deserializable";
+import { PersonalEmpresa } from "./personal-empresa";
+import { TareoProceso } from "./tareo-proceso";
 
 export class PersonalTareaProceso implements Deserializable {
 
@@ -24,6 +27,9 @@ export class PersonalTareaProceso implements Deserializable {
     idestado: number;
     idusuario: number;
     idactividad: number;
+    Actividad: Actividad;
+    Personal_Empresa: PersonalEmpresa;
+    TareaProceso: TareoProceso;
 
     pipe = new DatePipe('en-US');
 
@@ -33,6 +39,9 @@ export class PersonalTareaProceso implements Deserializable {
 
     deserialize(input: any) {
         Object.assign(this, input);
+        if(input['Actividad'])  this.Actividad= new Actividad().deserialize(input['Actividad']);
+        if(input['TareaProceso'])  this.TareaProceso= new TareoProceso().deserialize(input['TareaProceso']);
+        if(input['Personal_Empresa'])  this.Personal_Empresa= new PersonalEmpresa().deserialize(input['Personal_Empresa']);
         return this;
     }
 
@@ -49,5 +58,9 @@ export class PersonalTareaProceso implements Deserializable {
         return (this.pausainicio && this.pausafin) ? this.pipe.transform(this.pausainicio, 'shortTime') + ' - '
             + '  ' + this.pipe.transform(this.pausafin, 'shortTime')
             : '-No hay pausas-';
+    }
+
+    get turnoCompleto(): String{
+        return this.turno.trim().toUpperCase() == 'D' ? 'Día' : 'Noche';
     }
 }

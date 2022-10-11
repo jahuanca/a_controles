@@ -55,8 +55,19 @@ export class PersonalTareaProcesoService {
       );
   }
 
-  byRango(id: number): Observable<PersonalTareaProceso[]> {
-    return this.http.get<PersonalTareaProceso[]>(`${this.URL_API}/rango`, { headers: this.headers })
+  migrarContenido(arreglo: PersonalTareaProceso[]){
+    return this.http.post<PersonalTareaProceso[]>(`${this.URL_API}/migrar`, arreglo, { headers: this.headers })
+      .pipe(
+        map(data => data.map(data => new PersonalTareaProceso().deserialize(data)))
+      );
+  }
+
+  byRango(inicio:Date, fin:Date, tipo:boolean): Observable<PersonalTareaProceso[]> {
+    return this.http.post<PersonalTareaProceso[]>(`${this.URL_API}/rango`,{
+      'inicio': inicio,
+      'fin': fin,
+      'tipo': tipo
+    },{ headers: this.headers })
       .pipe(
         map(data => data.map(data => new PersonalTareaProceso().deserialize(data)))
       );

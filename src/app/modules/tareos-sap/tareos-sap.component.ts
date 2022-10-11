@@ -4,6 +4,7 @@ import { MantenedorTareo } from 'src/app/models/mantenedor-tareo';
 import { PersonalTareaProceso } from 'src/app/models/personal-tarea-proceso';
 import { MantenedorTareoService } from 'src/app/services/mantenedor-tareo.service';
 import { PersonalTareaProcesoService } from 'src/app/services/personal-tarea-proceso.service';
+import { TareoQASService } from 'src/app/services/tareo-qas.service';
 
 class ByRango{
   fechaInicio: Date;
@@ -22,10 +23,14 @@ export class TareosSapComponent implements OnInit {
   searchValue = '';
   mantenedors: MantenedorTareo[];
   visible = false;
+  loading:Boolean=false;
   listOfData: PersonalTareaProceso[] = [];
   listOfDisplayData = [...this.listOfData];
 
-  constructor(private personalTareaProcesoService: PersonalTareaProcesoService, private mantenedorTareoService: MantenedorTareoService) {
+  constructor(
+    private tareoQASService: TareoQASService,
+    private personalTareaProcesoService: PersonalTareaProcesoService, 
+    private mantenedorTareoService: MantenedorTareoService) {
 
   }
 
@@ -43,17 +48,25 @@ export class TareosSapComponent implements OnInit {
   }
 
   buscar() {
-    /* this.personalTareaProcesoService.byRango()
+    this.loading=true;
+    this.personalTareaProcesoService.byRango(
+      this.date[0],
+      this.date[1],
+      true
+    )
       .subscribe(res => {
+        this.loading=false;
         this.listOfData = res as PersonalTareaProceso[];
+        console.log(res.length);
         this.listOfDisplayData = [...this.listOfData];
-      }, err => { }); */
+      }, err => {
+        this.loading=false;
+      });
   }
 
-  date = null;
+  date :Date[]= null;
 
   onChange(result: Date[]): void {
-    console.log('onChange: ', result);
   }
 
   getWeek(result: Date[]): void {
@@ -63,6 +76,13 @@ export class TareosSapComponent implements OnInit {
   reset(): void {
     this.searchValue = '';
     this.search();
+  }
+
+  sincronizar(){
+    this.personalTareaProcesoService.migrarContenido(this.listOfData)
+      .subscribe( res => {
+        console.log(res);
+      })
   }
 
   search(): void {
