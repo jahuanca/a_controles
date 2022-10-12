@@ -30,6 +30,8 @@ export class PersonalTareaProceso implements Deserializable {
     Actividad: Actividad;
     Personal_Empresa: PersonalEmpresa;
     TareaProceso: TareoProceso;
+    Mensajesap: string;
+    estadosap: string;
 
     pipe = new DatePipe('en-US');
 
@@ -63,4 +65,13 @@ export class PersonalTareaProceso implements Deserializable {
     get turnoCompleto(): String{
         return this.turno.trim().toUpperCase() == 'D' ? 'Día' : 'Noche';
     }
+    
+    get estadoSap() : string{
+        switch(this.estadosap){
+            case null: return 'Sin migrar';
+            case 'E': return 'Error al migrar';
+            case 'T': return 'Transferido';
+        }
+    }
+
 }
