@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { getISOWeek } from 'date-fns';
 import { MantenedorTareo } from 'src/app/models/mantenedor-tareo';
 import { PersonalTareaProceso } from 'src/app/models/personal-tarea-proceso';
@@ -27,7 +28,10 @@ export class TareosSapComponent implements OnInit {
   listOfData: PersonalTareaProceso[] = [];
   listOfDisplayData = [...this.listOfData];
 
+  validateForm: FormGroup;
+
   constructor(
+    private fb: FormBuilder, 
     private tareoQASService: TareoQASService,
     private personalTareaProcesoService: PersonalTareaProcesoService, 
     private mantenedorTareoService: MantenedorTareoService) {
@@ -35,7 +39,23 @@ export class TareosSapComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.validateForm = this.fb.group({
+      rango: [null, [Validators.required]],
+      mantenedor: [null, [Validators.required]],
+    });
     this.getMantenedors();
+  }
+
+  submitForm(): void {
+    for (const i in this.validateForm.controls) {
+      if (this.validateForm.controls.hasOwnProperty(i)) {
+        this.validateForm.controls[i].markAsDirty();
+        this.validateForm.controls[i].updateValueAndValidity();
+      }
+    }
+    if(this.validateForm.status == 'VALID'){
+      this.buscar();
+    }
   }
 
   getMantenedors() {
@@ -48,23 +68,31 @@ export class TareosSapComponent implements OnInit {
   }
 
   buscar() {
-  //   this.personalTareaProcesoService.byRango()
-  //    .subscribe(res => {
-  //      this.listOfData = res as PersonalTareaProceso[];
-  //      this.listOfDisplayData = [...this.listOfData];
-  //    }, err => { }); 
-   }
-
-
+    this.loading=true;
+    this.personalTareaProcesoService.byRango(
+      this.date[0],
+      this.date[1],
+      true
+    )
+      .subscribe(res => {
+        this.loading=false;
+        this.listOfData = res as PersonalTareaProceso[];
+        console.log(res.length);
+        this.listOfDisplayData = [...this.listOfData];
+      }, err => {
+        this.loading=false;
+      });
+  }
 
   date :Date[]= null;
 
-  //changePagination= (args: any): Promise<any[]> => {
-    //return this.actividadService.getPersonalEmpresasByLimitAndOffset(args.limit, args.offset * ((args.page) ? args.page : 1 -1))
-    //  .toPromise();
-  //}
+  changePagination= (args: any): Promise<any[]> => {
+    return this.actividadService.getPersonalEmpresasByLimitAndOffset(args.limit, args.offset * ((args.page) ? args.page : 1 -1))
+      .toPromise();
+  }
 
   onChange(result: Date[]): void {
+    this.date=result;
   }
 
   getWeek(result: Date[]): void {

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TareosSapRoutingModule } from './tareos-sap-routing.module';
 import { TareosSapComponent } from './tareos-sap.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
     TareosSapRoutingModule,
     NgZorroAntdModule,
     FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class TareosSapModule { }
