@@ -9,6 +9,7 @@ export class Labor implements Deserializable{
     activo:      boolean;
     idusuario:   number;
     fechamod:    Date;
+    codigopresenta: string;
     Actividad:   Actividad;
 
     constructor(){}

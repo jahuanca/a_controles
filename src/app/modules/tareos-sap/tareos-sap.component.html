@@ -31,7 +31,7 @@
                                     <i class="fas fa-search"></i>
                                 </span>
                               </a>
-                              <a class="button is-rounded is-primary">
+                              <a class="button is-rounded is-primary" (click)="sincronizar()">
                                 <span class="icon">
                                   <i class="fas fa-paper-plane"></i>
                                 </span>
@@ -63,7 +63,9 @@
     </div>
   </section>
   
-  <nz-table #nzTable [nzData]="listOfDisplayData" nzTableLayout="fixed">
+  <nz-table #nzTable 
+  [nzLoading]="loading"
+  [nzData]="listOfDisplayData" nzTableLayout="fixed">
       <thead>
         <tr>
           <th nzCustomFilter>
@@ -85,8 +87,8 @@
           <td>{{ data.codigoempresa }}</td>
           <td>{{ data.horaFormato }}</td>
           <td>{{ data.pausaFormato }}</td>
-          <td>{{ data.age }}</td>
-          <td>{{ data.address }}</td>
+          <td>{{ data.turnoCompleto }}</td>
+          <td>{{ data.Actividad?.actividad}}</td>
         </tr>
       </tbody>
     </nz-table>
