@@ -86,10 +86,10 @@ export class TareosSapComponent implements OnInit {
 
   date :Date[]= null;
 
-  changePagination= (args: any): Promise<any[]> => {
-    return this.actividadService.getPersonalEmpresasByLimitAndOffset(args.limit, args.offset * ((args.page) ? args.page : 1 -1))
-      .toPromise();
-  }
+  //changePagination= (args: any): Promise<any[]> => {
+    //return this.actividadService.getPersonalEmpresasByLimitAndOffset(args.limit, args.offset * ((args.page) ? args.page : 1 -1))
+    //  .toPromise();
+  //}
 
   onChange(result: Date[]): void {
     this.date=result;
