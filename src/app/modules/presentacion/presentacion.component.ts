@@ -22,7 +22,7 @@ export class PresentacionComponent implements OnInit {
   viewLabors:boolean=false;
   labels: { label: string, value: string, isHtml: boolean, visible: boolean }[] = [
     { label: 'ID.', value: 'idpresentacion', isHtml: false, visible: true },
-    { label: 'Detalle', value: 'descripcion', isHtml: false, visible: true },
+    { label: 'Detalle', value: 'detalle', isHtml: false, visible: true },
     //{ label: 'Sociedad', value: 'idsociedad', isHtml: false, visible: true },
     { label: 'Descripcion', value: 'codigoempresa', isHtml: false, visible: true },
    

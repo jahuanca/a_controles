@@ -21,18 +21,18 @@ export class CentroCostoComponent implements OnInit {
   maxCount:number=0;
   viewLabors:boolean=false;
   labels: { label: string, value: string, isHtml: boolean, visible: boolean }[] = [
-    { label: 'Codigo.', value: 'codigoempresa', isHtml: false, visible: false },
+    { label: 'Codigo.', value: 'codigoempresa', isHtml: false, visible: true },
     { label: 'Detalle', value: 'detallecentrocosto', isHtml: false, visible: true },
     //{ label: 'Sociedad', value: 'idsociedad', isHtml: false, visible: true },
-    { label: 'Homologacion', value: 'homologacion', isHtml: false, visible: true },
+    //{ label: 'Homologacion', value: 'homologacion', isHtml: false, visible: true },
     { label: 'Activo', value: 'activo', isHtml: false, visible: true },
     { label: 'FechaInicio', value: 'fechainicio', isHtml: false, visible: true },
-    { label: 'FechaFin', value: 'fechabaja', isHtml: false, visible: true }
-    //{ label: 'Fundo', value: 'zfundo', isHtml: false, visible: true },
-    ////{ label: 'Etapa', value: 'zetapa', isHtml: false, visible: true },
-    //{ label: 'Campo', value: 'zcampo', isHtml: false, visible: true },
-    //{ label: 'Turno', value: 'zturno', isHtml: false, visible: true },
-    //{ label: 'Variedad', value: 'zvaried', isHtml: false, visible: true },
+    { label: 'FechaFin', value: 'fechabaja', isHtml: false, visible: true },
+    { label: 'Fundo', value: 'zfundo', isHtml: false, visible: true },
+    { label: 'Etapa', value: 'zetapa', isHtml: false, visible: true },
+    { label: 'Campo', value: 'zcampo', isHtml: false, visible: true },
+    { label: 'Turno', value: 'zturno', isHtml: false, visible: true },
+    { label: 'Variedad', value: 'zvaried', isHtml: false, visible: true },
 
   ];
 
