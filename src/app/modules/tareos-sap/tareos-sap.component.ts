@@ -48,7 +48,6 @@ export class TareosSapComponent implements OnInit {
   }
 
   buscar() {
-<<<<<<< HEAD
   //   this.personalTareaProcesoService.byRango()
   //    .subscribe(res => {
   //      this.listOfData = res as PersonalTareaProceso[];
@@ -57,23 +56,6 @@ export class TareosSapComponent implements OnInit {
    }
 
 
-=======
-    this.loading=true;
-    this.personalTareaProcesoService.byRango(
-      this.date[0],
-      this.date[1],
-      true
-    )
-      .subscribe(res => {
-        this.loading=false;
-        this.listOfData = res as PersonalTareaProceso[];
-        console.log(res.length);
-        this.listOfDisplayData = [...this.listOfData];
-      }, err => {
-        this.loading=false;
-      });
-  }
->>>>>>> b6448e0409325f6bbcb5e59ca0a68b31f2dbee64
 
   date :Date[]= null;
 
