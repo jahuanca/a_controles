@@ -20,8 +20,8 @@ export class Labor implements Deserializable{
         return this;
     }
 
-    get nombreActividad(): String{
+   /* get nombreActividad(): String{
         return this.Actividad.descripcion;
-    }
+    }*/
 }
 

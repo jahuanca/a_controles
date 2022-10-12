@@ -4,18 +4,24 @@ import { Labor } from "./labor";
 export class Actividad implements Deserializable {
     idactividad: number;
     actividad: string;
-    descripcion: string;
-    activo: boolean;
-    esrendimiento: boolean;
-    esjornal: boolean;
-    idsociedad: number;
-    idusuario: number;
-    fechamod: Date;
-    Labors: Labor[];
+    codigoactividad: string;
+    idlabor: number;
+    labor: string;
+    codigolabor: string;
+    estado: string;
+    tipolabor: string;
+    sociedad: string;
+    
+    //Labors: Labor[];
 
     constructor() { }
 
     deserialize(input: any) {
+        Object.assign(this, input);
+        return this;
+    }
+
+   /* deserialize(input: any) {
         Object.assign(this, input);
         let a = input['Labors'] as [];
         this.Labors = [];
@@ -34,6 +40,6 @@ export class Actividad implements Deserializable {
 
     get rendimiento(): String {
         return (this.esrendimiento) ? 'Rendimiento' : (this.esjornal) ? 'Jornal' : '-No registrado-';
-    }
+    }*/
 
 }

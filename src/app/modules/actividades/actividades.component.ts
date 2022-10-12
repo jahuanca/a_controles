@@ -19,11 +19,15 @@ export class ActividadesComponent implements OnInit {
   maxCount:number=0;
   viewLabors:boolean=false;
   labels: { label: string, value: string, isHtml: boolean, visible: boolean }[] = [
-    { label: 'id', value: 'idactividad', isHtml: false, visible: false },
-    { label: 'Codigo', value: 'actividad', isHtml: false, visible: true },
-    { label: 'Nombre', value: 'descripcion', isHtml: false, visible: true },
-    { label: 'Tipo', value: 'rendimiento', isHtml: false, visible: true },
-    { label: 'Labores', value: 'cantidadLabors', isHtml: true, visible: true },
+    { label: 'idlabor', value: 'idlabor', isHtml: false, visible: false },
+    { label: 'CodigoLabor', value: 'codigolabor', isHtml: false, visible: true },
+    { label: 'Labor', value: 'labor', isHtml: false, visible: true },
+    { label: 'idactividad', value: 'idactividad', isHtml: false, visible: false },
+    { label: 'CodigoActividad', value: 'codigoactividad', isHtml: false, visible: true },
+    { label: 'Actividad', value: 'actividad', isHtml: false, visible: true },
+    { label: 'TipoLabor', value: 'tipolabor', isHtml: false, visible: true },
+    { label: 'Sociedad', value: 'sociedad', isHtml: false, visible: true },
+    { label: 'Estado', value: 'estado', isHtml: false, visible: true },
   ];
 
   constructor(private actividadService: ActividadService, private router:Router) { }
