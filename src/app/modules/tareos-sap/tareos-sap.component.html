@@ -82,12 +82,12 @@
   [nzData]="listOfDisplayData" nzTableLayout="fixed">
       <thead>
         <tr>
-          <th nzCustomFilter>
+          <!-- <th nzCustomFilter>
             Codigo Empresa
             <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
               <i nz-icon nzType="search"></i>
             </nz-filter-trigger>
-          </th>
+          </th> -->
           <th>Personal</th>
           <th>Inicio - Fin</th>
           <th>Pausas</th>
@@ -96,14 +96,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of nzTable.data">
+        <tr *ngFor="let data of nzTable.data; let i=index">
           <td>{{ data.codigoempresa }}</td>
-          <td>{{ data.codigoempresa }}</td>
+          <!-- <td>{{ data.codigoempresa }}</td> -->
           <td>{{ data.horaFormato }}</td>
           <td>{{ data.pausaFormato }}</td>
-          <td>{{ data.turnoCompleto }}</td>
+          <td>{{ data.estadoSap}}</td>
           <td>
-            <a class="button is-rounded is-primary" (click)="sincronizar()">
+            <a *ngIf="data?.estadosap!='T'" class="button is-rounded is-primary" (click)="goSincronizar(i)">
               <span class="icon">
                 <i class="fas fa-paper-plane"></i>
               </span>
