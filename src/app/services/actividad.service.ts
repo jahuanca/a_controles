@@ -12,7 +12,7 @@ import { Actividad } from '../models/actividad';
 export class ActividadService {
 
 
-  readonly URL_API = `${Variables.URL_SERVER}actividad`
+  readonly URL_API = `${Variables.URL_SERVER}actividadlabor`
   headers: HttpHeaders
 
   constructor(private http: HttpClient) {

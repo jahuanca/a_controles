@@ -43,14 +43,21 @@ export class TareosSapComponent implements OnInit {
   }
 
   buscar() {
-    /* this.personalTareaProcesoService.byRango()
-      .subscribe(res => {
-        this.listOfData = res as PersonalTareaProceso[];
-        this.listOfDisplayData = [...this.listOfData];
-      }, err => { }); */
-  }
+  //   this.personalTareaProcesoService.byRango()
+  //    .subscribe(res => {
+  //      this.listOfData = res as PersonalTareaProceso[];
+  //      this.listOfDisplayData = [...this.listOfData];
+  //    }, err => { }); 
+   }
+
+
 
   date = null;
+
+  //changePagination= (args: any): Promise<any[]> => {
+    //return this.actividadService.getPersonalEmpresasByLimitAndOffset(args.limit, args.offset * ((args.page) ? args.page : 1 -1))
+    //  .toPromise();
+  //}
 
   onChange(result: Date[]): void {
     console.log('onChange: ', result);

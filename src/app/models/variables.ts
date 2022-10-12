@@ -1,12 +1,11 @@
 import * as jwt_decode from "jwt-decode";
 export class Variables {
     
-    public static URL_SERVER="http://localhost:3002/";
+    public static URL_SERVER="http://localhost:3000/";
 
     constructor() {
 
     }
-
     public static get(promise:Promise<any[]>) {
         return promise.then(data => {
            return [null, data];
