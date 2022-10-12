@@ -6,27 +6,41 @@
             <div class="column is-four-fifths">
               <div class="box">
                   <div class="columns is-multiline">
+                    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()" style="display: flex; width: 100%;">
                       <div class="column is-6">
-                          <div class="field">
+                        <nz-form-item>
+                          <nz-form-control nzErrorTip="Elija un rango de busqueda.">
+                            <div class="field">
                               <label class="label">Rango de busqueda</label>
                               <div class="control">
-                                  <nz-range-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-range-picker>
+                                  <nz-range-picker
+                                  formControlName="rango"
+                                  (ngModelChange)="onChange($event)"></nz-range-picker>
                               </div>
                           </div>
-                      </div>
-                      <div class="column is-6">
+                          </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div class="column is-6">
+                      <nz-form-item>
+                        <nz-form-control nzErrorTip="Elija un mantenedor.">
                           <div class="field">
-                              <label class="label">Mantenedor</label>
-                              <div class="control">
-                                  <nz-select ngModel="lucy" style="width: 100%;" nzPlaceHolder="Seleccione el mantenedor">
-                                      <nz-option *ngFor="let m of mantenedors" [nzValue]="m.idmantenedor" [nzLabel]="m.detallemantenedor"></nz-option>                                      
-                                    </nz-select>
-                              </div>
-                          </div>
-                      </div>
+                            <label class="label">Mantenedor</label>
+                            <div class="control">
+                                <nz-select
+                                formControlName="mantenedor"
+                                style="width: 100%;" nzPlaceHolder="Seleccione el mantenedor">
+                                    <nz-option *ngFor="let m of mantenedors" [nzValue]="m.idmantenedor" [nzLabel]="m.detallemantenedor"></nz-option>                                      
+                                  </nz-select>
+                            </div>
+                        </div>
+                        </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    </form>
                       <div class="column is-12">
                           <p class="field is-flex is-justify-content-space-around">
-                              <a class="button is-rounded" (click)="buscar()">
+                              <a class="button is-rounded" (click)="submitForm()">
                                 <span class="icon">
                                     <i class="fas fa-search"></i>
                                 </span>
@@ -78,7 +92,7 @@
           <th>Inicio - Fin</th>
           <th>Pausas</th>
           <th>Turno</th>
-          <th>Labor</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -88,7 +102,19 @@
           <td>{{ data.horaFormato }}</td>
           <td>{{ data.pausaFormato }}</td>
           <td>{{ data.turnoCompleto }}</td>
-          <td>{{ data.Actividad?.actividad}}</td>
+          <td>
+            <a class="button is-rounded is-primary" (click)="sincronizar()">
+              <span class="icon">
+                <i class="fas fa-paper-plane"></i>
+              </span>
+            </a>
+
+                            <!-- <button class="button is-danger">
+                                <span class="icon is-small">
+                                    <i class="fas fa-trash-alt"></i>
+                                </span>
+                            </button> -->
+          </td>
         </tr>
       </tbody>
     </nz-table>
