@@ -25,6 +25,8 @@
     "ng-zorro-antd": "^9.3.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
+    "file-saver": "^2.0.5",
+    "xlsx": "^0.17.4",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

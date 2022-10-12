@@ -44,9 +44,9 @@ export class PersonalComponent implements OnInit {
     this.getPersonalEmpresaCount();
   }
 
-  exportarExcel(){
-    this.excelService.exportAsExcelFile(this.listOfData, 'registros_'+this.subdivisionSelected);
-  }
+  //exportarExcel(){
+  //  this.excelService.exportAsExcelFile(this.listOfData, 'registros_'+this.subdivisionSelected);
+  //}
 
   getPersonalEmpresaCount() {
     this.loading = true;
