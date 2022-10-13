@@ -5,6 +5,7 @@ import { Actividad } from 'src/app/models/actividad';
 import { CentroCosto } from 'src/app/models/centrocosto';
 import { Usuario } from 'src/app/models/usuario';
 import { Variables } from 'src/app/models/variables';
+import { ExcelService } from 'src/app/services/excel.service';
 //import { ActividadService } from 'src/app/services/actividad.service';
 import { CentroCostoService } from 'src/app/services/centrocosto.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -20,11 +21,9 @@ export class CentroCostoComponent implements OnInit {
   loading:Boolean=false;
   maxCount:number=0;
   viewLabors:boolean=false;
-  labels: { label: string, value: string, isHtml: boolean, visible: boolean }[] = [
+  /*labels: { label: string, value: string, isHtml: boolean, visible: boolean }[] = [
     { label: 'Codigo.', value: 'codigoempresa', isHtml: false, visible: true },
     { label: 'Detalle', value: 'detallecentrocosto', isHtml: false, visible: true },
-    //{ label: 'Sociedad', value: 'idsociedad', isHtml: false, visible: true },
-    //{ label: 'Homologacion', value: 'homologacion', isHtml: false, visible: true },
     { label: 'Activo', value: 'activo', isHtml: false, visible: true },
     { label: 'FechaInicio', value: 'fechainicio', isHtml: false, visible: true },
     { label: 'FechaFin', value: 'fechabaja', isHtml: false, visible: true },
@@ -34,15 +33,19 @@ export class CentroCostoComponent implements OnInit {
     { label: 'Turno', value: 'zturno', isHtml: false, visible: true },
     { label: 'Variedad', value: 'zvaried', isHtml: false, visible: true },
 
-  ];
+  ];*/
 
-  constructor(private centrocostoService: CentroCostoService, private router:Router) { }
+  constructor(private centrocostoService: CentroCostoService,private excelService:ExcelService ,private router:Router) { }
   
   ngOnInit(): void {
   }
 
-  buscar = (args: any): void =>{
+  buscar (){
     this.getCentroCostoCount();
+  }
+
+  exportarExcel(){
+    this.excelService.exportAsExcelFile(this.data, 'registros_'+this.maxCount);
   }
 
   getCentroCostoCount() {

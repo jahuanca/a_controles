@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NzTreeModule } from 'ng-zorro-antd';
 import { Actividad } from 'src/app/models/actividad';
 import { PersonalObservado } from 'src/app/models/personalobservado';
+import { ExcelService } from 'src/app/services/excel.service';
 import { Usuario } from 'src/app/models/usuario';
 import { Variables } from 'src/app/models/variables';
 //import { ActividadService } from 'src/app/services/actividad.service';
@@ -20,23 +21,27 @@ export class PersonalObservadoComponent implements OnInit {
   loading:Boolean=false;
   maxCount:number=0;
   viewLabors:boolean=false;
-  labels: { label: string, value: string, isHtml: boolean, visible: boolean }[] = [
+  /*labels: { label: string, value: string, isHtml: boolean, visible: boolean }[] = [
     { label: 'DNI.', value: 'DNI', isHtml: false, visible: true },
     { label: 'Apellidos y Nombres', value: 'nombreCompleto', isHtml: false, visible: true },
     { label: 'Inicio', value: 'BEGDA', isHtml: false, visible: true },
     { label: 'Fin', value: 'ENDDA', isHtml: false, visible: true },
 
-  ];
+  ];*/
 
-  constructor(private personalobservadoservice: PersonalObservadoService, private router:Router) { }
+  constructor(private personalobservadoservice: PersonalObservadoService,private excelService:ExcelService , private router:Router) { }
   
   ngOnInit(): void {
   }
 
-  buscar = (args: any): void =>{
+  //buscar = (args: any): void =>{
+  buscar (){
     this.getPersonalObservadoCount();
   }
 
+  exportarExcel(){
+    this.excelService.exportAsExcelFile(this.data, 'registros_'+this.maxCount);
+  }
   getPersonalObservadoCount() {
     this.loading = true;
     this.personalobservadoservice.getPersonalObservadoCount()

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NzTreeModule } from 'ng-zorro-antd';
 import { Actividad } from 'src/app/models/actividad';
 import { Presentacion } from 'src/app/models/presentacion';
+import { ExcelService } from 'src/app/services/excel.service';
 import { Usuario } from 'src/app/models/usuario';
 import { Variables } from 'src/app/models/variables';
 //import { ActividadService } from 'src/app/services/actividad.service';
@@ -28,15 +29,18 @@ export class PresentacionComponent implements OnInit {
    
   ];
 
-  constructor(private presentacionService: PresentacionService, private router:Router) { }
+  constructor(private presentacionService: PresentacionService,private excelService:ExcelService , private router:Router) { }
   
   ngOnInit(): void {
   }
 
-  buscar = (args: any): void =>{
+  buscar (){
     this.getPresentacionCount();
   }
 
+  exportarExcel(){
+    this.excelService.exportAsExcelFile(this.data, 'registros_'+this.maxCount);
+  }
   getPresentacionCount() {
     this.loading = true;
     this.presentacionService.getPresentacionCount()

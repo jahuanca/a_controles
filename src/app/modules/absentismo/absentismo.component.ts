@@ -5,6 +5,7 @@ import { Actividad } from 'src/app/models/actividad';
 import { Absentismo } from 'src/app/models/absentismo';
 import { Usuario } from 'src/app/models/usuario';
 import { Variables } from 'src/app/models/variables';
+import { ExcelService } from 'src/app/services/excel.service';
 //import { ActividadService } from 'src/app/services/actividad.service';
 import { AbsentismoService } from 'src/app/services/absentismo.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -20,23 +21,26 @@ export class AbsentismoComponent implements OnInit {
   loading:Boolean=false;
   maxCount:number=0;
   viewLabors:boolean=false;
-  labels: { label: string, value: string, isHtml: boolean, visible: boolean }[] = [
+ /* labels: { label: string, value: string, isHtml: boolean, visible: boolean }[] = [
     { label: 'CodigoSAP.', value: 'codigosap', isHtml: false, visible: true },
     { label: 'Detalle', value: 'nombrecompleto', isHtml: false, visible: true },
-    //{ label: 'Sociedad', value: 'idsociedad', isHtml: false, visible: true },
     { label: 'Codigo', value: 'codigo', isHtml: false, visible: true },
     { label: 'Absentismo', value: 'descripcion', isHtml: false, visible: true },
     { label: 'FechaInicio', value: 'fechainicio', isHtml: false, visible: true },
     { label: 'FechaFin', value: 'fechafin', isHtml: false, visible: true }
-  ];
+  ];*/
 
-  constructor(private absentismoService: AbsentismoService, private router:Router) { }
+  constructor(private absentismoService: AbsentismoService,private excelService:ExcelService, private router:Router) { }
   
   ngOnInit(): void {
   }
 
-  buscar = (args: any): void =>{
+  buscar(){
     this.getAbsentismoCount();
+  }
+
+  exportarExcel(){
+    this.excelService.exportAsExcelFile(this.data, 'registros_'+this.maxCount);
   }
 
   getAbsentismoCount() {

@@ -22,11 +22,13 @@ export class ActividadService {
   }
 
   getActividadsByLimitAndOffset(limit: number, offset:number) {
-    return this.http.get<Actividad[]>(`${this.URL_API}/range&limit=${limit}&offset=${offset}`, { headers: this.headers })
+    return this.http.get<Actividad[]>(`${this.URL_API}/range&limit=limit&offset=offset`, { headers: this.headers })
       .pipe(
         map(data => data.map(data => new Actividad().deserialize(data)))
       );
   }
+
+
 
   getActividadsCount() {
     return this.http.get<number>(`${this.URL_API}/count`, { headers: this.headers })

@@ -1,7 +1,135 @@
-<app-card-buttons [data]='data' [buscar]='buscar' [label]="'actividades'"></app-card-buttons>
+<!--<app-card-buttons [data]='data' [buscar]='buscar' [label]="'actividades'"></app-card-buttons>
 <app-tabla-only [data]='data' [labels]='labels' [changePagination]='changePagination' [maxCount]='maxCount' [getInfo]='getInfo' ></app-tabla-only>
 
-<!--
 <nz-modal [(nzVisible)]="viewLabors" nzTitle="Labores">    
     <app-childs></app-childs>
-</nz-modal> -->
+</nz-modal> 
+-->
+
+<section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns">
+            <div class="column"></div>
+            <div class="column is-four-fifths">
+              <div class="box">
+                  <div class="columns is-multiline">
+                      <!--<div class="column is-4">
+                          <div class="field">
+                              <label class="label">Rango de busqueda</label>
+                              <div class="control">
+                                  <nz-range-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-range-picker>
+                              </div>
+                          </div>
+                      </div>-->
+
+                     <!-- <div class="column is-4">
+                          <div class="field">
+                              <label class="label">Encuesta</label>
+                              <div class="control">
+                                  <nz-select [(ngModel)]="encuestaSelected" style="width: 100%;" nzPlaceHolder="Seleccione la Encuesta">
+                                      <nz-option *ngFor="let m of encuesta" [nzValue]="m.id" [nzLabel]="m.titulo"></nz-option>                                      
+                                    </nz-select>
+                              </div>
+                          </div>
+                      </div>-->
+
+                      <!--<div class="column is-4">
+                        <div class="field">
+                            <label class="label">Sedes</label>
+                            <div class="control">
+                                <nz-select [(ngModel)]="subdivisionSelected" style="width: 100%;" nzPlaceHolder="Seleccione la Sede">
+                                    <nz-option *ngFor="let m of subdivision" [nzValue]="m.idsubdivision" [nzLabel]="m.detallesubdivision"></nz-option>                                      
+                                  </nz-select>
+                            </div>
+                        </div>
+                    </div>-->
+
+                      <div class="column is-12">
+                          <div class="field is-flex is-justify-content-space-around">
+                              <button class="button is-rounded" (click)="buscar()" >
+                                <span class="icon">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                              </button>
+                              <a class="button is-rounded is-primary">
+                                <span class="icon">
+                                  <i class="fas fa-paper-plane"></i>
+                                </span>
+                              </a>
+                              <a class="button is-rounded is-info">
+                                <span class="icon is-small">
+                                  <i class="fas fa-clipboard-check"></i>
+                                </span>
+                              </a>
+                              <a class="button is-rounded is-danger">
+                                <span class="icon is-small">
+                                  <i class="fas fa-file-code"></i>
+                                </span>
+                              </a>
+                              <div class="button is-rounded is-warning" (click)="exportarExcel()">
+                                <span class="icon is-small">
+                                  <i class="fas fa-file-excel"></i>
+                                </span>
+                              </div>
+                            </div>
+                      </div>
+                  </div>
+              </div>
+  
+            </div>
+            <div class="column"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!--<label class="label" *ngIf="buscado">Se encontraron {{listOfDisplayData.length}}</label>-->
+
+  <nz-table #nzTable [nzData]="data" nzTableLayout="fixed" >
+      <thead>
+        <tr>
+          
+          <th>idLabor</th>
+          <th>CodigoLabor</th>
+          <th>Labor</th>
+          <th>idActividad</th>
+          <th>CodigoActividad</th>
+          <th>Actividad</th>
+          <th>TipoLabor</th>
+          <th>Sociedad</th>
+          <th>Estado</th>
+          <th>Presentacion</th>
+         
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of nzTable.data">
+          <td>{{ data.idlabor }}</td>
+          <td>{{ data.codigolabor }}</td>
+          <td>{{ data.labor }}</td>
+          <td>{{ data.idactividad }}</td>
+          <td>{{ data.codigoactividad }}</td>
+          <td>{{ data.actividad }}</td>
+          <td>{{ data.tipolabor }}</td>
+          <td>{{ data.sociedad }}</td>
+          <td>{{ data.estado }}</td>
+          <td>{{ data.codigopresenta }}</td>
+          
+      
+
+
+        </tr>
+      </tbody>
+    </nz-table>
+   <!-- <nz-dropdown-menu #menu="nzDropdownMenu">
+      <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+          <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+          <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+            Search
+          </button>
+          <button nz-button nzSize="small" (click)="reset()">Reset</button>
+        </div>
+      </div>
+    </nz-dropdown-menu>-->
