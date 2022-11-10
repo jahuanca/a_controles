@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { TareosSapRoutingModule } from './tareos-sap-routing.module';
 import { TareosSapComponent } from './tareos-sap.component';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NzToolTipModule } from 'ng-zorro-antd';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgZorroAntdModule,
     FormsModule,
     ReactiveFormsModule,
+    NzToolTipModule,
   ]
 })
 export class TareosSapModule { }

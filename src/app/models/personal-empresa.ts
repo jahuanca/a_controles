@@ -32,4 +32,8 @@ export class PersonalEmpresa implements Deserializable{
     get nombreCompleto(): string{
         return `${this.apellidopaterno} ${this.apellidomaterno}, ${this.nombres}`;
     }
+
+    toString(){
+        return `${this.apellidopaterno} ${this.apellidomaterno}, ${this.nombres}`;
+    }
 }

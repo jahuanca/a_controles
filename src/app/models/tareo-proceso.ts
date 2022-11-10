@@ -35,4 +35,8 @@ export class TareoProceso implements Deserializable{
         if(input['Centro_Costo'])  this.Centro_Costo= new CentroCosto().deserialize(input['Centro_Costo']);
         return this;
     }
+
+    toString(){
+        return ``;
+    }
 }

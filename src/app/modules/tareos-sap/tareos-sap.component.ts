@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { getISOWeek } from 'date-fns';
 import { NzModalService, NzNotificationService } from 'ng-zorro-antd';
 import { MantenedorTareo } from 'src/app/models/mantenedor-tareo';
 import { PersonalTareaProceso } from 'src/app/models/personal-tarea-proceso';
+import { ExcelService } from 'src/app/services/excel.service';
 import { MantenedorTareoService } from 'src/app/services/mantenedor-tareo.service';
 import { PersonalTareaProcesoService } from 'src/app/services/personal-tarea-proceso.service';
 import { TareoQASService } from 'src/app/services/tareo-qas.service';
@@ -31,10 +33,14 @@ export class TareosSapComponent implements OnInit {
 
   validateForm: FormGroup;
 
+  downloadJsonHref;
+
   constructor(
+    private sanitizer: DomSanitizer,
     private fb: FormBuilder, 
     private modal: NzModalService,
     private tareoQASService: TareoQASService,
+    private excelService:ExcelService,
     private personalTareaProcesoService: PersonalTareaProcesoService, 
     private notification: NzNotificationService,
     private mantenedorTareoService: MantenedorTareoService) {
@@ -47,6 +53,10 @@ export class TareosSapComponent implements OnInit {
       mantenedor: [null, [Validators.required]],
     });
     this.getMantenedors();
+  }
+
+  exportarExcel(){
+    this.excelService.exportAsExcelFile(this.listOfDisplayData, 'registros_'+Date.now);
   }
 
   submitForm(): void {
@@ -72,6 +82,7 @@ export class TareosSapComponent implements OnInit {
 
   buscar() {
     this.loading=true;
+    this.label='tareo_sap_'+Date.now();
     this.personalTareaProcesoService.byRango(
       this.date[0],
       this.date[1],
@@ -85,6 +96,14 @@ export class TareosSapComponent implements OnInit {
       }, err => {
         this.loading=false;
       });
+  }
+
+  label:String='';
+
+  generateDownloadJsonUri() {
+    var theJSON = JSON.stringify(this.listOfData);
+    var uri = this.sanitizer.bypassSecurityTrustUrl("data:text/json;charset=UTF-8," + encodeURIComponent(theJSON));
+    this.downloadJsonHref = uri;
   }
 
   date :Date[]= null;
