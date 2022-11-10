@@ -49,7 +49,7 @@ export class PersonalTareaProceso implements Deserializable {
 
     get horaFormato(): String {
 
-        return (this.horainicio && this.horafin) ? this.pipe.transform(this.horainicio, 'shortDate')
+        return (this.horainicio && this.horafin) ? this.pipe.transform(this.fechamod, 'd/M/yy')
             + '  ' + this.pipe.transform(this.horainicio, 'shortTime') + ' - '
             + '  ' + this.pipe.transform(this.horafin, 'shortTime')
             : '-No hay horas-';

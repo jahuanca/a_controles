@@ -80,7 +80,7 @@ export class TareosSapComponent implements OnInit {
       .subscribe(res => {
         this.loading=false;
         this.listOfData = res as PersonalTareaProceso[];
-        console.log(res.length);
+        console.log(res);
         this.listOfDisplayData = [...this.listOfData];
       }, err => {
         this.loading=false;
