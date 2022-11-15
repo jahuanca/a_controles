@@ -166,7 +166,7 @@ export class TareosSapComponent implements OnInit {
 
   sincronizar(){
     if(this.seleccionados==null || this.seleccionados.length==0){
-      
+      this.createNotification('error', 'Seleccione algún registro.');
       return;
     }
     this.loading=true;
@@ -176,9 +176,9 @@ export class TareosSapComponent implements OnInit {
         let respuestas=res as PersonalTareaProceso[];
         for (let i = 0; i < respuestas.length; i++) {
           const p = respuestas[i];
-          let item=this.listOfDisplayData.findIndex((e)=>e.item == p.item);
-          this.listOfDisplayData[item].Mensajesap= p.Mensajesap;
-          this.listOfDisplayData[item].estadosap= p.estadosap;
+          let index=this.listOfDisplayData.findIndex((e)=>e.item == p.item);
+          this.listOfDisplayData[index].Mensajesap= p.Mensajesap;
+          this.listOfDisplayData[index].estadosap= p.estadosap;
         }
         this.listOfDisplayData=[...this.listOfDisplayData];
         this.listOfData=[...this.listOfDisplayData];
