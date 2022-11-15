@@ -7,7 +7,7 @@
               <div class="box">
                   <div class="columns is-multiline">
                     <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()" style="display: flex; width: 100%;">
-                      <div class="column is-6">
+                      <div class="column is-5">
                         <nz-form-item>
                           <nz-form-control nzErrorTip="Elija un rango de busqueda.">
                             <div class="field">
@@ -21,7 +21,7 @@
                           </nz-form-control>
                         </nz-form-item>
                     </div>
-                    <div class="column is-6">
+                    <div class="column is-4">
                       <nz-form-item>
                         <nz-form-control nzErrorTip="Elija un mantenedor.">
                           <div class="field">
@@ -29,8 +29,26 @@
                             <div class="control">
                                 <nz-select
                                 formControlName="mantenedor"
+                                [(ngModel)]="mantenedor"
                                 style="width: 100%;" nzPlaceHolder="Seleccione el mantenedor">
                                     <nz-option *ngFor="let m of mantenedors" [nzValue]="m.idmantenedor" [nzLabel]="m.detallemantenedor"></nz-option>                                      
+                                  </nz-select>
+                            </div>
+                        </div>
+                        </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div class="column is-3">
+                      <nz-form-item>
+                        <nz-form-control nzErrorTip="Elija un estado.">
+                          <div class="field">
+                            <label class="label">Estado</label>
+                            <div class="control">
+                                <nz-select
+                                formControlName="estado"
+                                [(ngModel)]="estado"
+                                style="width: 100%;" nzPlaceHolder="Seleccione el estado">
+                                    <nz-option *ngFor="let m of estados" [nzValue]="m.id" [nzLabel]="m.detalle"></nz-option>                                      
                                   </nz-select>
                             </div>
                         </div>
@@ -78,42 +96,38 @@
   </section>
   
   <nz-table #nzTable 
-  [nzLoading]="loading"
-  [nzData]="listOfDisplayData" nzTableLayout="fixed">
+    [nzLoading]="loading"
+    [nzData]="listOfDisplayData"
+    [nzScroll]="{ x: '60%' }"
+  >
       <thead>
         <tr>
-          <!-- <th nzCustomFilter>
-            Codigo Empresa
-            <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
-              <i nz-icon nzType="search"></i>
-            </nz-filter-trigger>
-          </th> -->
-          <th>Personal</th>
-          <th>Inicio - Fin</th>
+          <th
+            nzShowCheckbox
+            [(nzChecked)]="isAllDisplayDataChecked"
+            [nzIndeterminate]="isIndeterminate"
+            (nzCheckedChange)="checkAll($event)"
+          ></th>
+          <th nzLeft="0px">Personal</th>
+          <th nzLeft="100px"> Inicio - Fin</th>
           <th>Pausas</th>
           <th>Turno</th>
-          <th>Acciones</th>
+          <th nzRight="0px">Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let data of nzTable.data; let i=index">
-          <td>{{ data.codigoempresa }}</td>
-          <!-- <td>{{ data.codigoempresa }}</td> -->
-          <td>{{ data.horaFormato }}</td>
+          <td nzShowCheckbox [(nzChecked)]="mapOfCheckedId[data.item]" (nzCheckedChange)="refreshStatus(data)"></td>
+          <td nzLeft="0px">{{ data.codigoempresa }}</td>
+          <td nzLeft="100px">{{ data.horaFormato }}</td>
           <td>{{ data.pausaFormato }}</td>
           <td>{{ data.estadoSap}}</td>
-          <td>
+          <td nzRight="0px">
             <a *ngIf="data?.estadosap!='T'" class="button is-rounded is-primary" (click)="goSincronizar(i)">
               <span class="icon">
                 <i class="fas fa-paper-plane"></i>
               </span>
             </a>
-
-                            <!-- <button class="button is-danger">
-                                <span class="icon is-small">
-                                    <i class="fas fa-trash-alt"></i>
-                                </span>
-                            </button> -->
           </td>
         </tr>
       </tbody>

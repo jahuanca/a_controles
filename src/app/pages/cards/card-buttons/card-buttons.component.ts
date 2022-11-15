@@ -27,6 +27,6 @@ export class CardButtonsComponent implements OnInit, OnChanges {
     var theJSON = JSON.stringify(this.data);
     var uri = this.sanitizer.bypassSecurityTrustUrl("data:text/json;charset=UTF-8," + encodeURIComponent(theJSON));
     this.downloadJsonHref = uri;
-}
+  }
 
 }

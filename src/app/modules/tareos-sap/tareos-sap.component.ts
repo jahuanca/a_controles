@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { getISOWeek } from 'date-fns';
-import { NzModalService, NzNotificationService } from 'ng-zorro-antd';
+import { NzModalService, NzNotificationService, NzThSelectionComponent } from 'ng-zorro-antd';
 import { MantenedorTareo } from 'src/app/models/mantenedor-tareo';
 import { PersonalTareaProceso } from 'src/app/models/personal-tarea-proceso';
 import { ExcelService } from 'src/app/services/excel.service';
@@ -34,6 +34,15 @@ export class TareosSapComponent implements OnInit {
   validateForm: FormGroup;
 
   downloadJsonHref;
+  isAllDisplayDataChecked = false;
+  isIndeterminate = false;
+  mapOfCheckedId: { [key: string]: boolean } = {};
+  seleccionados: PersonalTareaProceso[]=[];
+  estados: {id: number, detalle: string}[]=[
+    {id: 1, detalle: 'Migrado'},
+    {id: 2, detalle: 'Error'},
+    {id: 3, detalle: 'Sin migrar'},
+  ];
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -51,8 +60,34 @@ export class TareosSapComponent implements OnInit {
     this.validateForm = this.fb.group({
       rango: [null, [Validators.required]],
       mantenedor: [null, [Validators.required]],
+      estado: [null, [Validators.required]],
     });
     this.getMantenedors();
+  }
+
+
+  refreshStatus(data:PersonalTareaProceso): void {
+    if(data){
+      let index=this.seleccionados.findIndex((e)=> e.item==data.item);
+      if(index==-1){
+        this.seleccionados.push(data);
+      }else{
+        this.seleccionados.splice(index,1)
+      }
+    }
+
+    this.isAllDisplayDataChecked = this.listOfDisplayData.every(item => this.mapOfCheckedId[item.item]);
+    this.isIndeterminate =
+      this.listOfDisplayData.some(item => this.mapOfCheckedId[item.item]) && !this.isAllDisplayDataChecked;
+  }
+
+  checkAll(value: boolean): void {
+    this.listOfDisplayData.forEach(item => (this.mapOfCheckedId[item.item] = value));
+    this.seleccionados=[];
+    if(value){
+      this.seleccionados=[...this.listOfDisplayData];
+    }
+    this.refreshStatus(null);
   }
 
   exportarExcel(){
@@ -80,13 +115,21 @@ export class TareosSapComponent implements OnInit {
       });
   }
 
+  estado:number=0;
+  mantenedor:number;
+
   buscar() {
+    console.log(this.date[0],
+      this.date[1],
+      this.mantenedor,
+      this.estado,)
     this.loading=true;
     this.label='tareo_sap_'+Date.now();
     this.personalTareaProcesoService.byRango(
       this.date[0],
       this.date[1],
-      true
+      this.mantenedor,
+      this.estado,
     )
       .subscribe(res => {
         this.loading=false;
@@ -108,11 +151,6 @@ export class TareosSapComponent implements OnInit {
 
   date :Date[]= null;
 
-  //changePagination= (args: any): Promise<any[]> => {
-    //return this.actividadService.getPersonalEmpresasByLimitAndOffset(args.limit, args.offset * ((args.page) ? args.page : 1 -1))
-    //  .toPromise();
-  //}
-
   onChange(result: Date[]): void {
     this.date=result;
   }
@@ -127,8 +165,12 @@ export class TareosSapComponent implements OnInit {
   }
 
   sincronizar(){
+    if(this.seleccionados==null || this.seleccionados.length==0){
+      
+      return;
+    }
     this.loading=true;
-    this.personalTareaProcesoService.migrarContenido(this.listOfData)
+    this.personalTareaProcesoService.migrarContenido(this.seleccionados)
       .subscribe( res => {
         this.loading=false;
         let respuestas=res as PersonalTareaProceso[];

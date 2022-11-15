@@ -62,10 +62,11 @@ export class PersonalTareaProcesoService {
       );
   }
 
-  byRango(inicio:Date, fin:Date, tipo:boolean): Observable<PersonalTareaProceso[]> {
+  byRango(inicio:Date, fin:Date, mantenedor:number , tipo:number): Observable<PersonalTareaProceso[]> {
     return this.http.post<PersonalTareaProceso[]>(`${this.URL_API}/rango`,{
       'inicio': inicio,
       'fin': fin,
+      'mantenedor': mantenedor,
       'tipo': tipo
     },{ headers: this.headers })
       .pipe(
