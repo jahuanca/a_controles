@@ -111,7 +111,8 @@
           <th nzLeft="0px">Personal</th>
           <th nzLeft="100px"> Inicio - Fin</th>
           <th>Pausas</th>
-          <th>Turno</th>
+          <th>Estado</th>
+          <th>Mensaje</th>
           <th nzRight="0px">Acciones</th>
         </tr>
       </thead>
@@ -122,6 +123,7 @@
           <td nzLeft="100px">{{ data.horaFormato }}</td>
           <td>{{ data.pausaFormato }}</td>
           <td>{{ data.estadoSap}}</td>
+          <td>{{ data.Mensajesap}}</td>
           <td nzRight="0px">
             <a *ngIf="data?.estadosap!='T'" class="button is-rounded is-primary" (click)="goSincronizar(i)">
               <span class="icon">
