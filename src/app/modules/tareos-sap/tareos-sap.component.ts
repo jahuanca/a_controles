@@ -182,6 +182,8 @@ export class TareosSapComponent implements OnInit {
         }
         this.listOfDisplayData=[...this.listOfDisplayData];
         this.listOfData=[...this.listOfDisplayData];
+        this.seleccionados=[];
+        this.checkAll(false);
         this.createNotification('success', 'Sincronización realizada.');
       })
   }
