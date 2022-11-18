@@ -3,7 +3,7 @@ import { CentroCosto } from "./centro-costo";
 import { Deserializable } from "./deserializable";
 import { Labor } from "./labor";
 
-export class TareoProceso implements Deserializable{
+export class TareaProceso implements Deserializable{
     itemtareoproceso: number;
     codigoempresasupervisor: string;
     codigoempresadigitador: string;

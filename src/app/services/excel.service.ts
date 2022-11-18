@@ -7,7 +7,7 @@ const EXCEL_EXTENSION = '.xlsx';
 @Injectable({ providedIn: 'root' })
 export class ExcelService {
   constructor() { }
-  public exportAsExcelFile(json: any, excelFileName: string): void {
+  public exportAsExcelFile(json: any, excelFileName: string, itemsToDelete: string[]=[] ): void {
     let excelBuffer: any;
     /* let workbook: XLSX.WorkBook; */
     const libro: XLSX.WorkBook = XLSX.utils.book_new();
@@ -15,7 +15,7 @@ export class ExcelService {
       let hoja: XLSX.WorkSheet;
       json.forEach((value: any, key: string) => {
         console.log(key, value);
-        let data = this.createContent(value);
+        let data = [...this.createContent(value, itemsToDelete)];
         hoja = XLSX.utils.json_to_sheet(data);
         XLSX.utils.book_append_sheet(libro, hoja, key);
         XLSX.write(libro, { bookType: 'xlsx', type: 'array' });
@@ -23,7 +23,7 @@ export class ExcelService {
 
       excelBuffer = XLSX.write(libro, { bookType: 'xlsx', type: 'array' });
     } else {
-      json = this.createContent(json);
+      json = this.createContent(json, itemsToDelete);
       let hoja = XLSX.utils.json_to_sheet(json);
       XLSX.utils.book_append_sheet(libro, hoja, 'data');
       excelBuffer = XLSX.write(libro, { bookType: 'xlsx', type: 'array' });
@@ -32,7 +32,7 @@ export class ExcelService {
     this.saveAsExcelFile(excelBuffer, excelFileName);
   }
 
-  createContent(json: any) {
+  createContent(json: any, itemsToDelete: string[]) {
     if (Array.isArray(json)) {
       for (let i = 0; i < json.length; i++) {
         const e = { ...json[i] };
@@ -45,10 +45,11 @@ export class ExcelService {
             e[key] = element.toString();
           }
         }
-
+        for (const key in itemsToDelete) { delete e[key] }
         json[i] = e;
       }
     } else {
+      for (const key in itemsToDelete) { delete json[key] }
       const e = { ...json };
       for (const key in e) {
         const element = e[key];
@@ -60,11 +61,13 @@ export class ExcelService {
         }
       }
       json = e;
+
       return [json];
     }
+
     return json;
   }
-
+  
 
   private saveAsExcelFile(buffer: any, fileName: string): void {
     const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });

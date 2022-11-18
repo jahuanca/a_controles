@@ -2,7 +2,7 @@ import { DatePipe } from "@angular/common";
 import { Actividad } from "./actividad";
 import { Deserializable } from "./deserializable";
 import { PersonalEmpresa } from "./personal-empresa";
-import { TareoProceso } from "./tareo-proceso";
+import { TareaProceso } from "./tarea-proceso";
 
 export class PersonalTareaProceso implements Deserializable {
 
@@ -27,13 +27,11 @@ export class PersonalTareaProceso implements Deserializable {
     idestado: number;
     idusuario: number;
     idactividad: number;
-    Actividad: Actividad;
+    /* Actividad: Actividad; */
     Personal_Empresa: PersonalEmpresa;
-    TareaProceso: TareoProceso;
+    TareaProceso: TareaProceso;
     Mensajesap: string;
     estadosap: string;
-
-    pipe = new DatePipe('en-US');
 
     constructor() {
 
@@ -41,24 +39,24 @@ export class PersonalTareaProceso implements Deserializable {
 
     deserialize(input: any) {
         Object.assign(this, input);
-        if(input['Actividad'])  this.Actividad= new Actividad().deserialize(input['Actividad']);
-        if(input['TareaProceso'])  this.TareaProceso= new TareoProceso().deserialize(input['TareaProceso']);
+        /* if(input['Actividad'])  this.Actividad= new Actividad().deserialize(input['Actividad']); */
         if(input['Personal_Empresa'])  this.Personal_Empresa= new PersonalEmpresa().deserialize(input['Personal_Empresa']);
+        if(input['TareaProceso'])  this.TareaProceso= new TareaProceso().deserialize(input['TareaProceso']);
         return this;
     }
 
     get horaFormato(): String {
 
-        return (this.horainicio && this.horafin) ? this.pipe.transform(this.fechamod, 'd/M/yy')
-            + '  ' + this.pipe.transform(this.horainicio, 'shortTime') + ' - '
-            + '  ' + this.pipe.transform(this.horafin, 'shortTime')
+        return (this.horainicio && this.horafin) ? new DatePipe('en-US').transform(this.fechamod, 'd/M/yy')
+            + '  ' + new DatePipe('en-US').transform(this.horainicio, 'shortTime') + ' - '
+            + '  ' + new DatePipe('en-US').transform(this.horafin, 'shortTime')
             : '-No hay horas-';
     }
 
     get pausaFormato(): String {
 
-        return (this.pausainicio && this.pausafin) ? this.pipe.transform(this.pausainicio, 'shortTime') + ' - '
-            + '  ' + this.pipe.transform(this.pausafin, 'shortTime')
+        return (this.pausainicio && this.pausafin) ? new DatePipe('en-US').transform(this.pausainicio, 'shortTime') + ' - '
+            + '  ' + new DatePipe('en-US').transform(this.pausafin, 'shortTime')
             : '-No hay pausas-';
     }
 

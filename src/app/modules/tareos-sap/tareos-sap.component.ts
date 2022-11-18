@@ -91,7 +91,10 @@ export class TareosSapComponent implements OnInit {
   }
 
   exportarExcel(){
-    this.excelService.exportAsExcelFile(this.listOfDisplayData, 'registros_'+Date.now);
+    let arregloExcel= [...this.listOfDisplayData];
+    
+
+    this.excelService.exportAsExcelFile(arregloExcel, 'registros_'+Date.now, ['pipe', 'TareaProceso', 'item']);
   }
 
   submitForm(): void {
