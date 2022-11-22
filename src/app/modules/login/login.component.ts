@@ -41,8 +41,8 @@ export class LoginComponent implements OnInit {
     this.authService.postAuth(this.auth)
       .subscribe( res => {
         console.log(res);
-        localStorage.setItem('token', res.token)
-        this.router.navigateByUrl('/packing');
+        localStorage.setItem('token-tareo', res.token)
+        this.router.navigateByUrl('/tareos');
       }, err => {});
   }
 

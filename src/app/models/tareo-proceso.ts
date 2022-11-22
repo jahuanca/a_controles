@@ -6,7 +6,7 @@ import { Labor } from "./labor";
 export class TareoProceso implements Deserializable{
     itemtareoproceso: number;
     codigoempresasupervisor: string;
-    codigoempresadigitador: string;
+    codigoempresa: string;
     fecha: Date;
     idactividad: number;
     idlabor: number;

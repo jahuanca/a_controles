@@ -13,9 +13,9 @@ export class UnAuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-    if (localStorage.getItem('token')) {
-      
-      return this.router.navigate(['/personal-vehiculo']).then(() => false);
+    let token=localStorage.getItem('token-tareo');
+      if (token) {
+      return this.router.navigateByUrl('/tareos').then(()=> false);
     }
     
     return true;

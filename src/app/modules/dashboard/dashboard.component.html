@@ -8,6 +8,10 @@
         </div>
       </div>
       <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+        <li nz-menu-item routerLink="/tareos" [nzSelected]='"tareos" == lastHref'>
+          <i nz-icon nzType="dashboard"></i>
+          <span>Tareos</span>
+        </li>
         <li nz-menu-item routerLink="/personal" [nzSelected]='"personal" == lastHref'>
           <i nz-icon nzType="usergroup-delete" nzTheme="outline"></i>
           <span>Personal</span>
@@ -19,10 +23,6 @@
         <li nz-menu-item routerLink="/actividades-y-labores" [nzSelected]='"actividades-y-labores" == lastHref'>
           <i nz-icon nzType="ordered-list" nzTheme="outline"></i>
           <span>Actividades y labores</span>
-        </li>
-        <li nz-menu-item routerLink="/tareos-de-sap" [nzSelected]='"tareos-de-sap" == lastHref'>
-          <i nz-icon nzType="dashboard"></i>
-          <span>Tareos de SAP</span>
         </li>
         <li nz-menu-item routerLink="/personal-observado" [nzSelected]='"personal-observado" == lastHref'>
           <i nz-icon nzType="user-switch" nzTheme="outline"></i>
@@ -40,10 +40,6 @@
           <i nz-icon nzType="dropbox" nzTheme="outline"></i>
           <span>Packing</span>
         </li>-->
-        <li nz-menu-item routerLink="/tareos" [nzSelected]='"tareos" == lastHref'>
-          <i nz-icon nzType="dashboard"></i>
-          <span>Tareos</span>
-        </li>
         <li nz-menu-item routerLink="/usuarios" [nzSelected]='"usuarios" == lastHref'>
           <i nz-icon nzType="user" nzTheme="outline"></i>
           <span>Usuarios</span>

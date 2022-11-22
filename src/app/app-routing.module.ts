@@ -4,7 +4,7 @@ import { AuthGuardGuard } from './guards/auth-guard.guard';
 import { UnAuthGuard } from './guards/un-auth.guard';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/' },
+  { path: '', pathMatch: 'full', redirectTo: '/tareos' },
   { path: '', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [AuthGuardGuard] },
   { path: 'login', loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule), canActivate: [UnAuthGuard] },
   { path: 'actividades', loadChildren: () => import('./modules/actividades/actividades.module').then(m => m.ActividadesModule) },

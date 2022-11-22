@@ -114,6 +114,10 @@
           <th nzWidth="100px" >Cod. Supervisor</th>
           <th nzWidth="100px" >Inicio - Fin</th>
           <th nzWidth="100px" >Pausas</th>
+          <th nzWidth="100px" >Etapa</th>
+          <th nzWidth="100px" >Campo</th>
+          <th nzWidth="100px" >Cultivo</th>
+          <th nzWidth="100px" >Variedad</th>
           <th nzWidth="100px" >Estado</th>
           <th nzWidth="100px" >Mensaje</th>
           <th nzWidth="100px" nzRight>Acciones</th>
@@ -127,6 +131,10 @@
           <td>{{ data.TareaProceso?.codigoempresasupervisor }}</td>
           <td>{{ data.horaFormato }}</td>
           <td>{{ data.pausaFormato }}</td>
+          <td>{{ data.TareaProceso?.Centro_Costo?.zetapa }}</td>
+          <td>{{ data.TareaProceso?.Centro_Costo?.zcampo }}</td>
+          <td>{{ data.TareaProceso?.Centro_Costo?.zcultivo }}</td>
+          <td>{{ data.TareaProceso?.Centro_Costo?.zvaried }}</td>
           <td>{{ data.estadoSap}}</td>
           <td>{{ data.Mensajesap}}</td>
           <td nzRight>

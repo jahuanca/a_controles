@@ -14,9 +14,9 @@ export class AuthGuardGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-    if (localStorage.getItem('token')==null) {
+    if (localStorage.getItem('token-tareo')==null) {
       console.log('no tiene token');
-      return this.router.navigate(['/login']).then(() => false);
+      return this.router.navigateByUrl('/login').then(()=> false);
     }
     console.log('tiene token');
     return true;
