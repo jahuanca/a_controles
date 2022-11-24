@@ -43,6 +43,7 @@ export class TareosSapComponent implements OnInit {
     {id: 2, detalle: 'Error'},
     {id: 3, detalle: 'Sin migrar'},
   ];
+  fechasBuscadas:string='';
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -92,8 +93,6 @@ export class TareosSapComponent implements OnInit {
 
   exportarExcel(){
     let arregloExcel= [...this.listOfDisplayData];
-    
-
     this.excelService.exportAsExcelFile(arregloExcel, 'registros_'+Date.now, ['pipe', 'TareaProceso', 'item']);
   }
 
@@ -135,8 +134,10 @@ export class TareosSapComponent implements OnInit {
       this.estado,
     )
       .subscribe(res => {
+
         this.loading=false;
         this.listOfData = res as PersonalTareaProceso[];
+        this.fechasBuscadas=`${this.listOfData.length} resultados encontrados.`;
         console.log(res);
         this.listOfDisplayData = [...this.listOfData];
       }, err => {
