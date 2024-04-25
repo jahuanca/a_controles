@@ -26,4 +26,9 @@ export class DashboardComponent implements OnInit {
     this.lastHref=cadenas.pop();    
   }
 
+  cerrarSesion(){
+    localStorage.clear();
+    this.router.navigate(['/login'])
+  }
+
 }
