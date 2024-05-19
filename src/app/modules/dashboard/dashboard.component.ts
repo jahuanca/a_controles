@@ -34,4 +34,9 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/login'])
   }
 
+  cerrarSesion(){
+    localStorage.clear();
+    this.router.navigate(['/login'])
+  }
+
 }
