@@ -1,104 +1,77 @@
 <nz-layout class="app-layout">
-    <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
-      [nzTrigger]="null">
-      <div class="sidebar-logo" routerLink="/tareos">
-        <div>
-          <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-          <h1>Agrovisión</h1>
-        </div>
+  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null">
+    <div class="sidebar-logo" routerLink="/tareos">
+      <div>
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <h1>Agrovisión</h1>
       </div>
-      <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-        <li nz-menu-item routerLink="/tareos" [nzSelected]='"tareos" == lastHref'>
-          <i nz-icon nzType="dashboard"></i>
-          <span>Tareos</span>
-        </li>
-        <li nz-menu-item routerLink="/personal" [nzSelected]='"personal" == lastHref'>
-          <i nz-icon nzType="usergroup-delete" nzTheme="outline"></i>
-          <span>Personal</span>
-        </li>
-        <li nz-menu-item routerLink="/centros-de-costo" [nzSelected]='"centro-de-costo" == lastHref'>
-          <i nz-icon nzType="apartment" nzTheme="outline"></i>
-          <span>Centro de costo</span>
-        </li>
-        <li nz-menu-item routerLink="/actividades-y-labores" [nzSelected]='"actividades-y-labores" == lastHref'>
-          <i nz-icon nzType="ordered-list" nzTheme="outline"></i>
-          <span>Actividades y labores</span>
-        </li>
-        <li nz-menu-item routerLink="/personal-observado" [nzSelected]='"personal-observado" == lastHref'>
-          <i nz-icon nzType="user-switch" nzTheme="outline"></i>
-          <span>Personal observado</span>
-        </li>
-        <li nz-menu-item routerLink="/presentaciones" [nzSelected]='"presentaciones" == lastHref'>
-          <i nz-icon nzType="appstore" nzTheme="outline"></i>
-          <span>Presentaciones</span>
-        </li>
-        <li nz-menu-item routerLink="/absentismo" [nzSelected]='"absentismo" == lastHref'>
-          <i nz-icon nzType="alert" nzTheme="outline"></i>
-          <span>Absentismos</span>
-        </li>
-        <!--<li nz-menu-item routerLink="/packing" [nzSelected]='"packing" == lastHref'>
-          <i nz-icon nzType="dropbox" nzTheme="outline"></i>
-          <span>Packing</span>
-        </li>-->
-        <li nz-menu-item routerLink="/usuarios" [nzSelected]='"usuarios" == lastHref'>
-          <i nz-icon nzType="user" nzTheme="outline"></i>
-          <span>Usuarios</span>
-        </li>
-        <!-- <li nz-menu-item routerLink="/varios" [nzSelected]='"varios" == lastHref'>
-          <i nz-icon nzType="dashboard"></i>
-          <span>E. Varios</span>
-        </li>
-        <li nz-menu-item routerLink="/seleccion" [nzSelected]='"seleccion" == lastHref'>
-          <i nz-icon nzType="dashboard"></i>
-          <span>E. Selección</span>
-        </li> -->
-        <!-- <li nz-submenu nzTitle="Sincronización" nzIcon="sync" [nzOpen]='lastHref.includes("sincronizacion")'>
-          <ul>
-            <li nz-menu-item>
-              <a routerLink="/sincronizacion-trabajador">S. de trabajador</a>
-            </li>
-            <li nz-menu-item [nzSelected]='"sincronizacion-actividad"==lastHref'>
-              <a routerLink="/sincronizacion-actividad">S. de actividad</a>
-            </li>
-            <li nz-menu-item [nzSelected]='"sincronizacion-labor"==lastHref'>
-              <a routerLink="/sincronizacion-labor">S. de labor</a>
-            </li>
-            <li nz-menu-item [nzSelected]='"sincronizacion-subdivision"==lastHref'>
-              <a routerLink="/sincronizacion-subdivision">S. de centro de costo</a>
-            </li>
-            <li nz-menu-item [nzSelected]='"sincronizacion-personal"==lastHref'>
-              <a routerLink="/sincronizacion-personal">S. de personal observación</a>
-            </li>
-            <li nz-menu-item [nzSelected]='"sincronizacion-absentismo"==lastHref'>
-              <a routerLink="/sincronizacion-absentismo">S. de personal absentismo</a>
-            </li>
-          </ul>
-        </li> -->
-      </ul>
-    </nz-sider>
-    <nz-layout>
-      <nz-header>
-        <div class="app-header">
-          <div nz-row>
-            <div nz-col nzSpan="8">
-              <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-                <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
-              </span>
-            </div>
-            <div nz-col nzSpan="4" nzOffset="12">
-              <div nz-row>
-                <div nz-col nzSpan="8"><i nz-icon nzType="expand" nzTheme="outline"></i></div>
-                <div nz-col nzSpan="8"><i nz-icon nzType="alert" nzTheme="outline"></i></div>
-                <div nz-col nzSpan="8"><nz-avatar nzText="U" style="color:#f56a00; background-color:#fde3cf;"></nz-avatar></div>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-menu-item routerLink="/tareos" [nzSelected]='"tareos" == lastHref'>
+        <i nz-icon nzType="dashboard"></i>
+        <span>Tareos</span>
+      </li>
+      <li nz-menu-item routerLink="/personal" [nzSelected]='"personal" == lastHref'>
+        <i nz-icon nzType="usergroup-delete" nzTheme="outline"></i>
+        <span>Personal</span>
+      </li>
+      <li nz-menu-item routerLink="/centros-de-costo" [nzSelected]='"centro-de-costo" == lastHref'>
+        <i nz-icon nzType="apartment" nzTheme="outline"></i>
+        <span>Centro de costo</span>
+      </li>
+      <li nz-menu-item routerLink="/actividades-y-labores" [nzSelected]='"actividades-y-labores" == lastHref'>
+        <i nz-icon nzType="ordered-list" nzTheme="outline"></i>
+        <span>Actividades y labores</span>
+      </li>
+      <li nz-menu-item routerLink="/personal-observado" [nzSelected]='"personal-observado" == lastHref'>
+        <i nz-icon nzType="user-switch" nzTheme="outline"></i>
+        <span>Personal observado</span>
+      </li>
+      <li nz-menu-item routerLink="/presentaciones" [nzSelected]='"presentaciones" == lastHref'>
+        <i nz-icon nzType="appstore" nzTheme="outline"></i>
+        <span>Presentaciones</span>
+      </li>
+      <li nz-menu-item routerLink="/absentismo" [nzSelected]='"absentismo" == lastHref'>
+        <i nz-icon nzType="alert" nzTheme="outline"></i>
+        <span>Absentismos</span>
+      </li>
+
+      <li nz-menu-item routerLink="/usuarios" [nzSelected]='"usuarios" == lastHref'>
+        <i nz-icon nzType="user" nzTheme="outline"></i>
+        <span>Usuarios</span>
+      </li>
+      <li nz-menu-item (click)="cerrarSesion()">
+        <i nz-icon nzType="dashboard"></i>
+        <span>Cerrar Sesión</span>
+      </li>
+
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <div nz-row>
+          <div nz-col nzSpan="8">
+            <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+              <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+            </span>
+          </div>
+          <div nz-col nzSpan="4" nzOffset="12">
+            <div nz-row>
+              <div nz-col nzSpan="8">
+              </div>
+              <div nz-col nzSpan="8"><nz-avatar nzText="U" style="color:#f56a00; background-color:#fde3cf;"></nz-avatar>
               </div>
             </div>
           </div>
         </div>
-      </nz-header>
-      <nz-content>
-        <div class="inner-content">
-          <router-outlet></router-outlet>
-        </div>
-      </nz-content>
-    </nz-layout>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
   </nz-layout>
+</nz-layout>

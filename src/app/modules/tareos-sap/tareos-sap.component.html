@@ -116,8 +116,12 @@
           <th nzWidth="100px" nzLeft>Codigo de trabajador</th>
           <th nzWidth="100px" >DNI</th>
           <th nzWidth="100px" >Cod. Supervisor</th>
+          <th nzWidth="100px" >Nombre</th>
+          <th nzWidth="100px" >Rendimiento</th>
+          <th nzWidth="100px" >Avance</th>
           <th nzWidth="100px" >Inicio - Fin</th>
           <th nzWidth="100px" >Pausas</th>
+          <th nzWidth="100px" >Centro de costo</th>
           <th nzWidth="100px" >Etapa</th>
           <th nzWidth="100px" >Campo</th>
           <th nzWidth="100px" >Cultivo</th>
@@ -132,9 +136,13 @@
           <td nzLeft nzShowCheckbox [(nzChecked)]="mapOfCheckedId[data.item]" (nzCheckedChange)="refreshStatus(data)"></td>
           <td nzLeft>{{ data.codigoempresa }}</td>
           <td>{{ data.Personal_Empresa?.nrodocumento }}</td>
+          <td>{{ data.Personal_Empresa?.nombreCompleto }}</td>
           <td>{{ data.TareaProceso?.codigoempresasupervisor }}</td>
+          <td>{{ data.cantidadhoras }}</td>
+          <td>{{ data.cantidadavance }}</td>
           <td>{{ data.horaFormato }}</td>
           <td>{{ data.pausaFormato }}</td>
+          <td>{{ data.TareaProceso?.Centro_Costo?.detallecentrocosto }}</td>
           <td>{{ data.TareaProceso?.Centro_Costo?.zetapa }}</td>
           <td>{{ data.TareaProceso?.Centro_Costo?.zcampo }}</td>
           <td>{{ data.TareaProceso?.Centro_Costo?.zcultivo }}</td>

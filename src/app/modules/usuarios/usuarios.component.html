@@ -51,8 +51,6 @@
 <section class="hero">
     <div class="hero-body">
         <div class="container">
-            <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="maxCount" [nzPageSize]='limit'
-                (nzPageIndexChange)='changePagination($event)'></nz-pagination>
             <nz-table #basicTable [nzData]="data" [nzLoading]="loading" [nzShowPagination]='false'>
                 <thead>
                     <tr>
