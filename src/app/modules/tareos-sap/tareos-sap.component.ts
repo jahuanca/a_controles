@@ -10,11 +10,83 @@ import { MantenedorTareoService } from 'src/app/services/mantenedor-tareo.servic
 import { PersonalTareaProcesoService } from 'src/app/services/personal-tarea-proceso.service';
 import { TareoQASService } from 'src/app/services/tareo-qas.service';
 
-class ByRango{
+class ByRango {
   fechaInicio: Date;
   fechaFin: Date;
   esRendimiento: boolean;
   esPacking: boolean;
+}
+
+class ExportDataItem {
+  item: number;
+  dni: string;
+  codigoSupervisor: string;
+  supervisor: string;
+  codigoDigitador: string;
+  digitador: string;
+  cantidadRendimiento: number;
+  cantidadAvance: number;
+  cantidadHoras: number;
+  hora: string;
+  pausa: string;
+  codigoCentro: string;
+  centroCosto: string;
+  codigoActividad: string;
+  actividad: string;
+  codigoLabor: string;
+  labor: string;
+  etapa: string;
+  campo: string;
+  cultivo: string;
+  variedad: string;
+  estado: string;
+
+  constructor(
+    item: number,
+    dni: string,
+    codigoDigitador: string,
+    digitador: string,
+    codigoSupervisor: string,
+    supervisor: string,
+    cantidadRendimiento: number,
+    cantidadAvance: number,
+    cantidadHoras: number,
+    hora: string,
+    pausa: string,
+    codigoCentro: string,
+    centroCosto: string,
+    codigoActividad: string,
+    actividad: string,
+    codigoLabor: string,
+    labor: string,
+    etapa: string,
+    campo: string,
+    cultivo: string,
+    variedad: string,
+    estado: string) {
+    this.item = item
+    this.dni = dni
+    this.codigoSupervisor = codigoSupervisor
+    this.supervisor = supervisor
+    this.codigoDigitador = codigoDigitador
+    this.digitador = digitador
+    this.cantidadRendimiento = cantidadRendimiento
+    this.cantidadAvance = cantidadAvance
+    this.cantidadHoras = cantidadHoras
+    this.hora = hora
+    this.pausa = pausa
+    this.codigoCentro = codigoCentro
+    this.centroCosto = centroCosto
+    this.codigoActividad = codigoActividad
+    this.actividad = actividad
+    this.codigoLabor = codigoLabor
+    this.labor = labor
+    this.etapa = etapa
+    this.campo = campo
+    this.cultivo = cultivo
+    this.variedad = variedad
+    this.estado = estado
+  }
 }
 
 @Component({
@@ -27,7 +99,7 @@ export class TareosSapComponent implements OnInit {
   searchValue = '';
   mantenedors: MantenedorTareo[];
   visible = false;
-  loading:Boolean=false;
+  loading: Boolean = false;
   listOfData: PersonalTareaProceso[] = [];
   listOfDisplayData = [...this.listOfData];
 
@@ -37,21 +109,21 @@ export class TareosSapComponent implements OnInit {
   isAllDisplayDataChecked = false;
   isIndeterminate = false;
   mapOfCheckedId: { [key: string]: boolean } = {};
-  seleccionados: PersonalTareaProceso[]=[];
-  estados: {id: number, detalle: string}[]=[
-    {id: 1, detalle: 'Migrado'},
-    {id: 2, detalle: 'Error'},
-    {id: 3, detalle: 'Sin migrar'},
+  seleccionados: PersonalTareaProceso[] = [];
+  estados: { id: number, detalle: string }[] = [
+    { id: 1, detalle: 'Migrado' },
+    { id: 2, detalle: 'Error' },
+    { id: 3, detalle: 'Sin migrar' },
   ];
-  fechasBuscadas:string='';
+  fechasBuscadas: string = '';
 
   constructor(
     private sanitizer: DomSanitizer,
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private modal: NzModalService,
     private tareoQASService: TareoQASService,
-    private excelService:ExcelService,
-    private personalTareaProcesoService: PersonalTareaProcesoService, 
+    private excelService: ExcelService,
+    private personalTareaProcesoService: PersonalTareaProcesoService,
     private notification: NzNotificationService,
     private mantenedorTareoService: MantenedorTareoService) {
 
@@ -67,13 +139,13 @@ export class TareosSapComponent implements OnInit {
   }
 
 
-  refreshStatus(data:PersonalTareaProceso): void {
-    if(data){
-      let index=this.seleccionados.findIndex((e)=> e.item==data.item);
-      if(index==-1){
+  refreshStatus(data: PersonalTareaProceso): void {
+    if (data) {
+      let index = this.seleccionados.findIndex((e) => e.item == data.item);
+      if (index == -1) {
         this.seleccionados.push(data);
-      }else{
-        this.seleccionados.splice(index,1)
+      } else {
+        this.seleccionados.splice(index, 1)
       }
     }
 
@@ -84,16 +156,50 @@ export class TareosSapComponent implements OnInit {
 
   checkAll(value: boolean): void {
     this.listOfDisplayData.forEach(item => (this.mapOfCheckedId[item.item] = value));
-    this.seleccionados=[];
-    if(value){
-      this.seleccionados=[...this.listOfDisplayData];
+    this.seleccionados = [];
+    if (value) {
+      this.seleccionados = [...this.listOfDisplayData];
     }
     this.refreshStatus(null);
   }
 
-  exportarExcel(){
-    let arregloExcel= [...this.listOfDisplayData];
-    this.excelService.exportAsExcelFile(arregloExcel, 'registros_'+Date.now, ['pipe', 'TareaProceso', 'item']);
+  exportarExcel() {
+    let arregloExcel = [...this.listOfDisplayData];
+    let dayFormat = new Date().toLocaleDateString('pe-ES', { year: 'numeric', month: 'short', day: 'numeric' })
+    let data =
+      arregloExcel.map((value, index) => {
+        let {
+          TareaProceso: tareo
+        } = value
+        return new ExportDataItem(
+          index+1,
+          tareo.Digitador.nrodocumento,
+          tareo.Digitador.codigoempresa,
+          tareo.Digitador.nombreCompleto,
+          tareo.Supervisor.nrodocumento,
+          tareo.Supervisor.nombreCompleto,
+          value.cantidadrendimiento,
+          value.cantidadavance,
+          value.cantidadhoras,
+          value.horaFormato,
+          value.pausaFormato,
+          tareo.Centro_Costo?.codigoempresa,
+          tareo.Centro_Costo?.detallecentrocosto,
+          tareo.Actividad?.actividad,
+          tareo.Actividad?.descripcion,
+          tareo.Labor?.labor,
+          tareo.Labor?.descripcion,
+          tareo.Centro_Costo?.zetapa,
+          tareo.Centro_Costo?.zcampo,
+          tareo.Centro_Costo?.zcultivo,
+          tareo.Centro_Costo?.zvaried,
+          value.estadoSap
+        )
+      })
+
+
+
+    this.excelService.exportAsExcelFile(data, 'registros_' + dayFormat, ['pipe', 'TareaProceso', 'item']);
   }
 
   submitForm(): void {
@@ -103,7 +209,7 @@ export class TareosSapComponent implements OnInit {
         this.validateForm.controls[i].updateValueAndValidity();
       }
     }
-    if(this.validateForm.status == 'VALID'){
+    if (this.validateForm.status == 'VALID') {
       this.buscar();
     }
   }
@@ -117,16 +223,16 @@ export class TareosSapComponent implements OnInit {
       });
   }
 
-  estado:number=0;
-  mantenedor:number;
+  estado: number = 0;
+  mantenedor: number;
 
   buscar() {
     console.log(this.date[0],
       this.date[1],
       this.mantenedor,
       this.estado,)
-    this.loading=true;
-    this.label='tareo_sap_'+Date.now();
+    this.loading = true;
+    this.label = 'tareo_sap_' + Date.now();
     this.personalTareaProcesoService.byRango(
       this.date[0],
       this.date[1],
@@ -135,17 +241,17 @@ export class TareosSapComponent implements OnInit {
     )
       .subscribe(res => {
 
-        this.loading=false;
+        this.loading = false;
         this.listOfData = res as PersonalTareaProceso[];
-        this.fechasBuscadas=`${this.listOfData.length} resultados encontrados.`;
+        this.fechasBuscadas = `${this.listOfData.length} resultados encontrados.`;
         console.log(res);
         this.listOfDisplayData = [...this.listOfData];
       }, err => {
-        this.loading=false;
+        this.loading = false;
       });
   }
 
-  label:String='';
+  label: String = '';
 
   generateDownloadJsonUri() {
     var theJSON = JSON.stringify(this.listOfData);
@@ -153,10 +259,10 @@ export class TareosSapComponent implements OnInit {
     this.downloadJsonHref = uri;
   }
 
-  date :Date[]= null;
+  date: Date[] = null;
 
   onChange(result: Date[]): void {
-    this.date=result;
+    this.date = result;
   }
 
   getWeek(result: Date[]): void {
@@ -168,25 +274,25 @@ export class TareosSapComponent implements OnInit {
     this.search();
   }
 
-  sincronizar(){
-    if(this.seleccionados==null || this.seleccionados.length==0){
+  sincronizar() {
+    if (this.seleccionados == null || this.seleccionados.length == 0) {
       this.createNotification('error', 'Seleccione algún registro.');
       return;
     }
-    this.loading=true;
+    this.loading = true;
     this.personalTareaProcesoService.migrarContenido(this.seleccionados)
-      .subscribe( res => {
-        this.loading=false;
-        let respuestas=res as PersonalTareaProceso[];
+      .subscribe(res => {
+        this.loading = false;
+        let respuestas = res as PersonalTareaProceso[];
         for (let i = 0; i < respuestas.length; i++) {
           const p = respuestas[i];
-          let index=this.listOfDisplayData.findIndex((e)=>e.item == p.item);
-          this.listOfDisplayData[index].Mensajesap= p.Mensajesap;
-          this.listOfDisplayData[index].estadosap= p.estadosap;
+          let index = this.listOfDisplayData.findIndex((e) => e.item == p.item);
+          this.listOfDisplayData[index].Mensajesap = p.Mensajesap;
+          this.listOfDisplayData[index].estadosap = p.estadosap;
         }
-        this.listOfDisplayData=[...this.listOfDisplayData];
-        this.listOfData=[...this.listOfDisplayData];
-        this.seleccionados=[];
+        this.listOfDisplayData = [...this.listOfDisplayData];
+        this.listOfData = [...this.listOfDisplayData];
+        this.seleccionados = [];
         this.checkAll(false);
         this.createNotification('success', 'Sincronización realizada.');
       })
@@ -200,25 +306,25 @@ export class TareosSapComponent implements OnInit {
     );
   }
 
-  sincronizarByItem(item:number){
-    this.loading=true;
+  sincronizarByItem(item: number) {
+    this.loading = true;
     this.personalTareaProcesoService.migrarContenido([this.listOfDisplayData[item]])
-      .subscribe( res => {
-        this.loading=false;
+      .subscribe(res => {
+        this.loading = false;
         console.log(res);
-        let p=res[0] as PersonalTareaProceso;
-        this.listOfDisplayData[item].Mensajesap= p.Mensajesap;
-        this.listOfDisplayData[item].estadosap= p.estadosap;
-        this.listOfDisplayData=[...this.listOfDisplayData];
-        this.listOfData=[...this.listOfDisplayData];
-        this.createNotification(p.estadosap!='T' ? 'error' : 'success', p.Mensajesap ?? 'Sin mensaje de retorno');
+        let p = res[0] as PersonalTareaProceso;
+        this.listOfDisplayData[item].Mensajesap = p.Mensajesap;
+        this.listOfDisplayData[item].estadosap = p.estadosap;
+        this.listOfDisplayData = [...this.listOfDisplayData];
+        this.listOfData = [...this.listOfDisplayData];
+        this.createNotification(p.estadosap != 'T' ? 'error' : 'success', p.Mensajesap ?? 'Sin mensaje de retorno');
       })
   }
 
-  goSincronizarAll(){
+  goSincronizarAll() {
     this.modal.info({
       nzTitle: 'ADVERTENCIA',
-      nzOnCancel: ()=> {},
+      nzOnCancel: () => { },
       nzContent: '<p>¿Desea sincronizar todos los registros presentes?</p>',
       nzCancelText: 'Cancelar',
       nzOkText: 'Continuar',
@@ -226,10 +332,10 @@ export class TareosSapComponent implements OnInit {
     });
   }
 
-  goSincronizar(item:number){
+  goSincronizar(item: number) {
     this.modal.info({
       nzTitle: 'ADVERTENCIA',
-      nzOnCancel: ()=> {},
+      nzOnCancel: () => { },
       nzContent: '<p>¿Desea sincronizar el siguiente registro?</p>',
       nzCancelText: 'Cancelar',
       nzOkText: 'Continuar',

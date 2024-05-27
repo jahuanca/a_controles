@@ -2,6 +2,7 @@ import { Actividad } from "./actividad";
 import { CentroCosto } from "./centro-costo";
 import { Deserializable } from "./deserializable";
 import { Labor } from "./labor";
+import { PersonalEmpresa } from "./personal-empresa";
 
 export class TareaProceso implements Deserializable{
     itemtareoproceso: number;
@@ -28,12 +29,16 @@ export class TareaProceso implements Deserializable{
     Labor: Labor;
     Actividad: Actividad;
     Centro_Costo: CentroCosto;
+    Digitador: PersonalEmpresa;
+    Supervisor: PersonalEmpresa;
 
     deserialize(input: any) {
         Object.assign(this, input);
         if(input['Actividad'])  this.Actividad= new Actividad().deserialize(input['Actividad']);
         if(input['Labor'])  this.Labor= new Labor().deserialize(input['Labor']);
         if(input['Centro_Costo'])  this.Centro_Costo= new CentroCosto().deserialize(input['Centro_Costo']);
+        if(input['Digitador'])  this.Digitador= new PersonalEmpresa().deserialize(input['Digitador']);
+        if(input['Supervisor'])  this.Supervisor= new PersonalEmpresa().deserialize(input['Supervisor']);
         return this;
     }
 

@@ -45,7 +45,7 @@ export class PersonalTareaProceso implements Deserializable {
         return this;
     }
 
-    get horaFormato(): String {
+    get horaFormato(): string {
 
         return (this.horainicio && this.horafin) ? new DatePipe('en-US').transform(this.fechamod, 'd/M/yy')
             + '  ' + new DatePipe('en-US').transform(this.horainicio, 'shortTime') + ' - '
@@ -53,14 +53,14 @@ export class PersonalTareaProceso implements Deserializable {
             : '-No hay horas-';
     }
 
-    get pausaFormato(): String {
+    get pausaFormato(): string {
 
         return (this.pausainicio && this.pausafin) ? new DatePipe('en-US').transform(this.pausainicio, 'shortTime') + ' - '
             + '  ' + new DatePipe('en-US').transform(this.pausafin, 'shortTime')
             : '-No hay pausas-';
     }
 
-    get turnoCompleto(): String{
+    get turnoCompleto(): string{
         return this.turno.trim().toUpperCase() == 'D' ? 'Día' : 'Noche';
     }
     

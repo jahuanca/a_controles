@@ -6,6 +6,7 @@ export class Actividad implements Deserializable {
     actividad: string;
     codigoactividad: string;
     idlabor: number;
+    descripcion: string;
     labor: string;
     codigolabor: string;
     estado: string;

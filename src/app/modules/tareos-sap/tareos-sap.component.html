@@ -1,174 +1,178 @@
 <section class="hero">
-    <div class="hero-body">
-      <div class="container">
-        <div class="columns">
-            <div class="column"></div>
-            <div class="column is-four-fifths">
-              <div class="box">
-                  <div class="columns is-multiline">
-                    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()" style="display: flex; width: 100%;">
-                      <div class="column is-5">
-                        <nz-form-item>
-                          <nz-form-control nzErrorTip="Elija un rango de busqueda.">
-                            <div class="field">
-                              <label class="label">Rango de busqueda</label>
-                              <div class="control">
-                                  <nz-range-picker
-                                  formControlName="rango"
-                                  (ngModelChange)="onChange($event)"></nz-range-picker>
-                              </div>
-                          </div>
-                          </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                    <div class="column is-4">
-                      <nz-form-item>
-                        <nz-form-control nzErrorTip="Elija un mantenedor.">
-                          <div class="field">
-                            <label class="label">Mantenedor</label>
-                            <div class="control">
-                                <nz-select
-                                formControlName="mantenedor"
-                                [(ngModel)]="mantenedor"
-                                style="width: 100%;" nzPlaceHolder="Seleccione el mantenedor">
-                                    <nz-option *ngFor="let m of mantenedors" [nzValue]="m.idmantenedor" [nzLabel]="m.detallemantenedor"></nz-option>                                      
-                                  </nz-select>
-                            </div>
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns">
+        <div class="column"></div>
+        <div class="column is-four-fifths">
+          <div class="box">
+            <div class="columns is-multiline">
+              <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()"
+                style="display: flex; width: 100%;">
+                <div class="column is-5">
+                  <nz-form-item>
+                    <nz-form-control nzErrorTip="Elija un rango de busqueda.">
+                      <div class="field">
+                        <label class="label">Rango de busqueda</label>
+                        <div class="control">
+                          <nz-range-picker formControlName="rango" (ngModelChange)="onChange($event)"></nz-range-picker>
                         </div>
-                        </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                    <div class="column is-3">
-                      <nz-form-item>
-                        <nz-form-control nzErrorTip="Elija un estado.">
-                          <div class="field">
-                            <label class="label">Estado</label>
-                            <div class="control">
-                                <nz-select
-                                formControlName="estado"
-                                [(ngModel)]="estado"
-                                style="width: 100%;" nzPlaceHolder="Seleccione el estado">
-                                    <nz-option *ngFor="let m of estados" [nzValue]="m.id" [nzLabel]="m.detalle"></nz-option>                                      
-                                  </nz-select>
-                            </div>
-                        </div>
-                        </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                    </form>
-                      <div class="column is-12">
-                          <p class="field is-flex is-justify-content-space-around">
-                              <a class="button is-rounded" (click)="submitForm()">
-                                <span class="icon">
-                                    <i class="fas fa-search"></i>
-                                </span>
-                              </a>
-                              <a class="button is-rounded is-primary" (click)="sincronizar()">
-                                <span class="icon">
-                                  <i class="fas fa-paper-plane"></i>
-                                </span>
-                              </a>
-                              <a class="button is-rounded is-info">
-                                <span class="icon is-small">
-                                  <i class="fas fa-clipboard-check"></i>
-                                </span>
-                              </a>
-                              <a class="button is-rounded is-danger">
-                                <span class="icon is-small" nz-tooltip nzTooltipTitle="Descargar JSON">
-                                  <i class="fas fa-file-code"></i>
-                                </span>
-                              </a>
-                              <a class="button is-rounded is-warning" (click)="exportarExcel()" nz-tooltip nzTooltipTitle="Descargar EXCEL">
-                                <span class="icon is-small">
-                                  <i class="fas fa-file-excel"></i>
-                                </span>
-                              </a>
-                            </p>
                       </div>
-                  </div>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+                <div class="column is-4">
+                  <nz-form-item>
+                    <nz-form-control nzErrorTip="Elija un mantenedor.">
+                      <div class="field">
+                        <label class="label">Mantenedor</label>
+                        <div class="control">
+                          <nz-select formControlName="mantenedor" [(ngModel)]="mantenedor" style="width: 100%;"
+                            nzPlaceHolder="Seleccione el mantenedor">
+                            <nz-option *ngFor="let m of mantenedors" [nzValue]="m.idmantenedor"
+                              [nzLabel]="m.detallemantenedor"></nz-option>
+                          </nz-select>
+                        </div>
+                      </div>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+                <div class="column is-3">
+                  <nz-form-item>
+                    <nz-form-control nzErrorTip="Elija un estado.">
+                      <div class="field">
+                        <label class="label">Estado</label>
+                        <div class="control">
+                          <nz-select formControlName="estado" [(ngModel)]="estado" style="width: 100%;"
+                            nzPlaceHolder="Seleccione el estado">
+                            <nz-option *ngFor="let m of estados" [nzValue]="m.id" [nzLabel]="m.detalle"></nz-option>
+                          </nz-select>
+                        </div>
+                      </div>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+              </form>
+              <div class="column is-12">
+                <p class="field is-flex is-justify-content-space-around">
+                  <a class="button is-rounded" (click)="submitForm()">
+                    <span class="icon">
+                      <i class="fas fa-search"></i>
+                    </span>
+                  </a>
+                  <a class="button is-rounded is-primary" (click)="sincronizar()">
+                    <span class="icon">
+                      <i class="fas fa-paper-plane"></i>
+                    </span>
+                  </a>
+                  <a class="button is-rounded is-info">
+                    <span class="icon is-small">
+                      <i class="fas fa-clipboard-check"></i>
+                    </span>
+                  </a>
+                  <a class="button is-rounded is-danger">
+                    <span class="icon is-small" nz-tooltip nzTooltipTitle="Descargar JSON">
+                      <i class="fas fa-file-code"></i>
+                    </span>
+                  </a>
+                  <a class="button is-rounded is-warning" (click)="exportarExcel()" nz-tooltip
+                    nzTooltipTitle="Descargar EXCEL">
+                    <span class="icon is-small">
+                      <i class="fas fa-file-excel"></i>
+                    </span>
+                  </a>
+                </p>
               </div>
-  
             </div>
-            <div class="column"></div>
+          </div>
+
         </div>
+        <div class="column"></div>
       </div>
     </div>
-  </section>
-
-  <div class="sub-title">
-    {{fechasBuscadas}}
   </div>
-  
-  <div style="width: 70vw;">
-    <nz-table #nzTable 
-    [nzLoading]="loading"
-    [nzData]="listOfDisplayData"
-    [nzScroll]="{ x: '100%' }"
-  >
-      <thead>
-        <tr>
-          <th nzWidth="50px" nzLeft
-            nzShowCheckbox
-            [(nzChecked)]="isAllDisplayDataChecked"
-            [nzIndeterminate]="isIndeterminate"
-            (nzCheckedChange)="checkAll($event)"
-          ></th>
-          <th nzWidth="100px" nzLeft>Codigo de trabajador</th>
-          <th nzWidth="100px" >DNI</th>
-          <th nzWidth="100px" >Cod. Supervisor</th>
-          <th nzWidth="100px" >Nombre</th>
-          <th nzWidth="100px" >Rendimiento</th>
-          <th nzWidth="100px" >Avance</th>
-          <th nzWidth="100px" >Inicio - Fin</th>
-          <th nzWidth="100px" >Pausas</th>
-          <th nzWidth="100px" >Centro de costo</th>
-          <th nzWidth="100px" >Etapa</th>
-          <th nzWidth="100px" >Campo</th>
-          <th nzWidth="100px" >Cultivo</th>
-          <th nzWidth="100px" >Variedad</th>
-          <th nzWidth="100px" >Estado</th>
-          <th nzWidth="100px" >Mensaje</th>
-          <th nzWidth="100px" nzRight>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of nzTable.data; let i=index">
-          <td nzLeft nzShowCheckbox [(nzChecked)]="mapOfCheckedId[data.item]" (nzCheckedChange)="refreshStatus(data)"></td>
-          <td nzLeft>{{ data.codigoempresa }}</td>
-          <td>{{ data.Personal_Empresa?.nrodocumento }}</td>
-          <td>{{ data.Personal_Empresa?.nombreCompleto }}</td>
-          <td>{{ data.TareaProceso?.codigoempresasupervisor }}</td>
-          <td>{{ data.cantidadhoras }}</td>
-          <td>{{ data.cantidadavance }}</td>
-          <td>{{ data.horaFormato }}</td>
-          <td>{{ data.pausaFormato }}</td>
-          <td>{{ data.TareaProceso?.Centro_Costo?.detallecentrocosto }}</td>
-          <td>{{ data.TareaProceso?.Centro_Costo?.zetapa }}</td>
-          <td>{{ data.TareaProceso?.Centro_Costo?.zcampo }}</td>
-          <td>{{ data.TareaProceso?.Centro_Costo?.zcultivo }}</td>
-          <td>{{ data.TareaProceso?.Centro_Costo?.zvaried }}</td>
-          <td>{{ data.estadoSap}}</td>
-          <td>{{ data.Mensajesap}}</td>
-          <td nzRight>
-            <a *ngIf="data?.estadosap!='T'" class="button is-rounded is-primary" (click)="goSincronizar(i)">
-              <span class="icon">
-                <i class="fas fa-paper-plane"></i>
-              </span>
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </nz-table>
-  </div>
+</section>
 
-    <nz-dropdown-menu #menu="nzDropdownMenu">
-      <div class="ant-table-filter-dropdown">
-        <div class="search-box">
-          <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
-          <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
-            Search
-          </button>
-          <button nz-button nzSize="small" (click)="reset()">Reset</button>
-        </div>
-      </div>
-    </nz-dropdown-menu>
+<div class="sub-title">
+  {{fechasBuscadas}}
+</div>
+
+<div style="width: 70vw;">
+  <nz-table #nzTable [nzLoading]="loading" [nzData]="listOfDisplayData" [nzScroll]="{ x: '100%' }">
+    <thead>
+      <tr>
+        <th nzWidth="50px" nzLeft nzShowCheckbox [(nzChecked)]="isAllDisplayDataChecked"
+          [nzIndeterminate]="isIndeterminate" (nzCheckedChange)="checkAll($event)"></th>
+        <th nzWidth="100px" nzLeft>DNI</th>
+        <th nzWidth="100px">Cod. Digitador</th>
+        <th nzWidth="100px">Digitador</th>
+        <th nzWidth="100px">Cod. Supervisor</th>
+        <th nzWidth="100px">Supervisor</th>
+        <th nzWidth="100px">Rendimiento</th>
+        <th nzWidth="100px">Avance</th>
+        <th nzWidth="100px">Horas</th>
+        <th nzWidth="100px">Inicio - Fin</th>
+        <th nzWidth="100px">Pausas</th>
+        <th nzWidth="100px">Cod. Centro</th>
+        <th nzWidth="100px">Centro de costo</th>
+        <th nzWidth="100px">Cod. Actividad</th>
+        <th nzWidth="100px">Actividad</th>
+        <th nzWidth="100px">Cod. Labor</th>
+        <th nzWidth="100px">Labor</th>
+        <th nzWidth="100px">Etapa</th>
+        <th nzWidth="100px">Campo</th>
+        <th nzWidth="100px">Cultivo</th>
+        <th nzWidth="100px">Variedad</th>
+        <th nzWidth="100px">Estado</th>
+        <th nzWidth="100px">Mensaje</th>
+        <th nzWidth="100px" nzRight>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of nzTable.data; let i=index">
+        <td nzLeft nzShowCheckbox [(nzChecked)]="mapOfCheckedId[data.item]" (nzCheckedChange)="refreshStatus(data)">
+        </td>
+        <td nzLeft>{{ data.TareaProceso?.Digitador.nrodocumento }}</td>
+        <td>{{ data.TareaProceso?.codigoempresadigitador }}</td>
+        <td>{{ data.TareaProceso?.Digitador.nombreCompleto }}</td>
+        <td>{{ data.TareaProceso?.codigoempresasupervisor }}</td>
+        <td>{{ data.TareaProceso?.Supervisor.nombreCompleto }}</td>
+        <td>{{ data.cantidadrendimiento }}</td>
+        <td>{{ data.cantidadavance }}</td>
+        <td>{{ data.cantidadhoras}}</td>
+        <td>{{ data.horaFormato}}</td>
+        <td>{{ data.pausaFormato }}</td>
+        <td>{{ data.TareaProceso?.Centro_Costo?.codigoempresa }}</td>
+        <td>{{ data.TareaProceso?.Centro_Costo?.detallecentrocosto }}</td>
+        <td>{{ data.TareaProceso?.Actividad?.actividad }}</td>
+        <td>{{ data.TareaProceso?.Actividad?.descripcion }}</td>
+        <td>{{ data.TareaProceso?.Labor?.labor }}</td>
+        <td>{{ data.TareaProceso?.Labor?.descripcion }}</td>
+        <td>{{ data.TareaProceso?.Centro_Costo?.zetapa }}</td>
+        <td>{{ data.TareaProceso?.Centro_Costo?.zcampo }}</td>
+        <td>{{ data.TareaProceso?.Centro_Costo?.zcultivo }}</td>
+        <td>{{ data.TareaProceso?.Centro_Costo?.zvaried }}</td>
+        <td>{{ data.estadoSap}}</td>
+        <td>{{ data.Mensajesap}}</td>
+        <td nzRight>
+          <a *ngIf="data?.estadosap!='T'" class="button is-rounded is-primary" (click)="goSincronizar(i)">
+            <span class="icon">
+              <i class="fas fa-paper-plane"></i>
+            </span>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+      <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+        Search
+      </button>
+      <button nz-button nzSize="small" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</nz-dropdown-menu>

@@ -35,7 +35,7 @@ export class CentroCostoService {
   }
 
   getCentroCostoByLimitAndOffset(limit: number, offset:number) {
-    return this.http.get<CentroCosto[]>(`${this.URL_API}/range&limit=limit&offset=offset`, { headers: this.headers })
+    return this.http.get<CentroCosto[]>(`${this.URL_API}/range?limit=${limit}&offset=${offset}`, { headers: this.headers })
       .pipe(
         map(data => data.map(data => new CentroCosto().deserialize(data)))
       );
